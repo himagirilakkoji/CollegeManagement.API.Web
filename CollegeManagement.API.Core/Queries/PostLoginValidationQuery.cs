@@ -1,4 +1,5 @@
 ﻿using CollegeManagement.API.Core.Domain;
+using CollegeManagement.API.Core.Domain.Procedures;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace CollegeManagement.API.Core.Queries
 {
-    public record GetAdminByEmailID(LoginRequestPayload LoginRequest) : IRequest<AdminDetailsVM>
+    public record PostLoginValidation(LoginRequestPayload LoginRequest) : IRequest<LoginResponceVM>
     {
 
     }

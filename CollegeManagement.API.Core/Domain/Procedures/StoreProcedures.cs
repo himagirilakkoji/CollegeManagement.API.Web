@@ -8,6 +8,6 @@ namespace CollegeManagement.API.Core.Domain.Procedures
 {
     public class StoreProcedures
     {
-        public string? PostFaculty { get; set; }
+        public string? UserLoginValidations { get; set; }
     }
 }

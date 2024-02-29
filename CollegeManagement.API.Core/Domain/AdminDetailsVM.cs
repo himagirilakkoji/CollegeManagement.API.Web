@@ -16,5 +16,7 @@ namespace CollegeManagement.API.Core.Domain
         public string? PasswordHash { get; set; }
         public int AdminRoleID { get; set; }
         public DateTime? CreatedAt { get; set; }
+        public int RoleID { get; set; }
+        public string? RoleName { get; set; }
     }
 }

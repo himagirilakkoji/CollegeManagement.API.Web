@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using CollegeManagement.API.Core.Domain;
+using CollegeManagement.API.Core.Domain.Procedures;
 using CollegeManagement.API.Data.Entities;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +17,10 @@ namespace CollegeManagement.API.Data.Mappers
         {
                 CreateMap<RolesEntity,RoleDetailsVM>().ReverseMap();
                 CreateMap<AdminDetailsEntity, AdminDetailsVM>().ReverseMap();
+                CreateMap<SPUserLoginValidationsEntity,LoginResponceVM>()
+                  .ForMember(dest => dest.ResponseCode, src => src.MapFrom(x => x.ResponseCode))
+                  .ForMember(dest => dest.ErrorProcedure, src => src.MapFrom(x => x.ErrorProcedure))
+                  .ForMember(dest => dest.adminDetails, src => src.Ignore());
         }
     }
 }

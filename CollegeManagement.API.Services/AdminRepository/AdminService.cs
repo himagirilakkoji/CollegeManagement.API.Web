@@ -1,9 +1,12 @@
 ﻿using AutoMapper;
 using CollegeManagement.API.Core.Domain;
+using CollegeManagement.API.Core.Domain.Procedures;
 using CollegeManagement.API.Data;
+using CollegeManagement.API.Data.CommandsHandler;
 using CollegeManagement.API.Services.AdminRepository;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,28 +18,24 @@ namespace CollegeManagement.API.Services.AdminRepository
 {
     public class AdminService : IAdminService
     {
-        private readonly CollegeDbQueryContext _collegeDbQueryContext;
+        private readonly CollegeDbCommandContext _collegeDbCommandContext;
         private readonly IMapper _mapper;
-        public AdminService(CollegeDbQueryContext collegeDbQueryContext, IMapper mapper)
+        private readonly UserLoginValidation _userLoginValidation;
+        private readonly StoreProcedures _storeProcedures;
+
+        public AdminService(CollegeDbCommandContext collegeDbCommandContext, IMapper mapper , UserLoginValidation userLoginValidation, IOptions<StoreProcedures> storeProcedures)
         {
-            _collegeDbQueryContext = collegeDbQueryContext;
+            _collegeDbCommandContext = collegeDbCommandContext;
             _mapper = mapper;
+            _userLoginValidation = userLoginValidation;
+            _storeProcedures = storeProcedures.Value;
+
         }
 
-        public async Task<AdminDetailsVM> GetAdminByEmailAsync(LoginRequestPayload payload)
+        public async Task<LoginResponceVM> PostLoginValidationAsync(LoginRequestPayload payload)
         {
-            var entityResult = await _collegeDbQueryContext.adminDetailstblEntities.Where(x => x.Email == payload.EmailID).FirstOrDefaultAsync();
-
-            return _mapper.Map<AdminDetailsVM>(entityResult);
+            return await _userLoginValidation.ExecuteStoredProcedure(_storeProcedures.UserLoginValidations , payload);
         }
 
-        //public string GenerateSHA256Hash(String input)
-        //{
-        //    byte[] bytes = System.Text.Encoding.UTF8.GetBytes(input);
-        //    System.Security.Cryptography.SHA256Managed sha256hashstring =
-        //        new System.Security.Cryptography.SHA256Managed();
-        //    byte[] hash = sha256hashstring.ComputeHash(bytes);
-        //    return Convert.ToBase64String(hash);
-        //}
     }
 }

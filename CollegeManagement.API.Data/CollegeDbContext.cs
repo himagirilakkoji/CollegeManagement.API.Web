@@ -21,14 +21,19 @@ namespace CollegeManagement.API.Data
             modelBuilder.HasDefaultSchema("dbo");
             modelBuilder.ApplyConfiguration(new AdmintblEntityMap());
             modelBuilder.ApplyConfiguration(new RolestblEntityMap());
+            modelBuilder.Entity<SPUserLoginValidationsEntity>().HasNoKey();
             base.OnModelCreating(modelBuilder);
         }
 
 
         //Address tbl DbSet
         public DbSet<AdminDetailsEntity> adminDetailstblEntities { get; set; }
+
         //Country tbl DbSet
         public DbSet<RolesEntity> rolestblEntities { get; set; }
+
+        //Post LoginValidation DbSet
+        public DbSet<SPUserLoginValidationsEntity> sPUserLoginValidationsEntities { get; set; }
 
     }
 }

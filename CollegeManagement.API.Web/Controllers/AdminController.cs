@@ -1,4 +1,5 @@
 ﻿using CollegeManagement.API.Core.Domain;
+using CollegeManagement.API.Core.Domain.Procedures;
 using CollegeManagement.API.Core.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -29,18 +30,30 @@ namespace CollegeManagement.API.Web.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status422UnprocessableEntity)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        [HttpGet("AdminDetailsByEmailID/{EmailID}/{Password}")]
-        public async Task<ActionResult<AdminDetailsVM>> Get(string EmailID, string Password)
+        [HttpPost("LoginValidation")]
+        public async Task<ActionResult<LoginResponceVM>> Post(LoginRequestPayload request)
         {
-            LoginRequestPayload request = new LoginRequestPayload()
+            try
             {
-                EmailID = EmailID,
-                Password = Password
-            };
+                var result = await _mediator.Send<LoginResponceVM>(new PostLoginValidation(request));
 
-            var result = await _mediator.Send<AdminDetailsVM>(new GetAdminByEmailID(request));
+                if (result.ErrorProcedure != null)
+                {
+                    return StatusCode(StatusCodes.Status500InternalServerError);
+                }
 
-            return Ok(result);
+                if (result.adminDetails == null)
+                {
+                    return NotFound();
+                }
+
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+
         }
     }
 }
