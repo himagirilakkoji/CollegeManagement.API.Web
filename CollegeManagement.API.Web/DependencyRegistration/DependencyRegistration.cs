@@ -1,5 +1,6 @@
 ﻿using CollegeManagement.API.Data;
 using CollegeManagement.API.Data.CommandsHandler;
+using CollegeManagement.API.Data.QueriesHandler;
 using CollegeManagement.API.Services.AdminRepository;
 using Microsoft.EntityFrameworkCore;
 
@@ -16,6 +17,7 @@ namespace CollegeManagement.API.Web.DependencyRegistration
 
             services.AddScoped<IAdminService, AdminService>();
             services.AddScoped<UserLoginValidation>();
+            services.AddScoped<GetDepartmentDetails>();
             return services;
         }
     }

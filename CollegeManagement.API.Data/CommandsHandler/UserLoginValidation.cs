@@ -3,6 +3,7 @@ using CollegeManagement.API.Core.Domain;
 using CollegeManagement.API.Core.Domain.Procedures;
 using CollegeManagement.API.Data.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using System;
@@ -18,34 +19,31 @@ namespace CollegeManagement.API.Data.CommandsHandler
         private readonly CollegeDbCommandContext _collegeDbCommandContext;
         private readonly IMapper _mapper;
         private readonly StoreProcedures _storeProcedures;
-        public UserLoginValidation(CollegeDbCommandContext collegeDbCommandContext, IMapper mapper, IOptions<StoreProcedures> storeProcedures)
+        private readonly ILogger<UserLoginValidation> _logger;
+        public UserLoginValidation(CollegeDbCommandContext collegeDbCommandContext, IMapper mapper, IOptions<StoreProcedures> storeProcedures, ILogger<UserLoginValidation> logger)
         {
             _collegeDbCommandContext = collegeDbCommandContext;
             _mapper = mapper;
             _storeProcedures = storeProcedures.Value;
+            _logger = logger;
         }
 
         public async Task<LoginResponceVM> ExecuteStoredProcedure(string spname, LoginRequestPayload payload)
         {
-            try
-            {
+                _logger.LogInformation("Started processing {namespace} UserLoginValidation", typeof(UserLoginValidation).Namespace);
+                
                 //Calling stored procedure 
                 var entity = await _collegeDbCommandContext.Set<SPUserLoginValidationsEntity>().FromSqlInterpolated($@"exec {spname} @EmailId = {payload.EmailID} , @Password={payload.Password} ").ToListAsync();
-                var result = _mapper.Map<LoginResponceVM>(entity[0]);
-                if (entity[0].Response != null)
+                var result = _mapper.Map<LoginResponceVM>(entity.FirstOrDefault());
+
+                if (entity.FirstOrDefault().Response != null)
                 {
-                    var adminDetails = JsonConvert.DeserializeObject<AdminDetailsVM>(entity[0].Response);
+                    var adminDetails = JsonConvert.DeserializeObject<AdminDetailsVM>(entity.FirstOrDefault().Response);
                     result.adminDetails = adminDetails;
                 }
+
+                _logger.LogInformation("Completed processing {namespace} UserLoginValidation", typeof(UserLoginValidation).Namespace);
                 return result;
-            }
-            catch (Exception ex)
-            {
-                var x = ex.ToString();
-                return null;
-
-            }
-
         }
     }
 }

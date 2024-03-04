@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace CollegeManagement.API.Core.Domain.Procedures
 {
-    public class StoreProcedures
+    public class SubjectsVM
     {
-        public string? UserLoginValidations { get; set; }
-        public string? GetDepartmentdata { get; set; }
+        public int subjectId { get; set; }
+        public string? subjectName { get; set; }
     }
 }

@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace CollegeManagement.API.Core.Domain.Procedures
 {
-    public class StoreProcedures
+    public class DepartmentDataVM
     {
-        public string? UserLoginValidations { get; set; }
-        public string? GetDepartmentdata { get; set; }
+        public int? departmentId { get; set; }
+        public string? departmentName { get; set; }
+        public List<CoursesVM>? courses { get; set; }
     }
 }

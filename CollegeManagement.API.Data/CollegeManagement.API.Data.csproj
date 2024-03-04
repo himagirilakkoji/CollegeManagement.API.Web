@@ -16,10 +16,6 @@
     </ItemGroup>
 	
   <ItemGroup>
-    <Folder Include="QueriesHandler\" />
-  </ItemGroup>
-	
-  <ItemGroup>
     <ProjectReference Include="..\CollegeManagement.API.Core\CollegeManagement.API.Core.csproj" />
   </ItemGroup>
 

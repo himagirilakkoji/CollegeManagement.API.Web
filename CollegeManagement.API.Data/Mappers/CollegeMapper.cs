@@ -16,11 +16,15 @@ namespace CollegeManagement.API.Data.Mappers
         public CollegeMapper()
         {
                 CreateMap<RolesEntity,RoleDetailsVM>().ReverseMap();
-                CreateMap<AdminDetailsEntity, AdminDetailsVM>().ReverseMap();
+
                 CreateMap<SPUserLoginValidationsEntity,LoginResponceVM>()
                   .ForMember(dest => dest.ResponseCode, src => src.MapFrom(x => x.ResponseCode))
                   .ForMember(dest => dest.ErrorProcedure, src => src.MapFrom(x => x.ErrorProcedure))
                   .ForMember(dest => dest.adminDetails, src => src.Ignore());
+
+                CreateMap<SPGetDepartmentdataEntity, DepartmentResponceVM>()
+                  .ForMember(dest => dest.ErrorProcedure, src => src.MapFrom(x => x.ErrorProcedure))
+                  .ForMember(dest => dest.Response, src => src.Ignore());
         }
     }
 }
