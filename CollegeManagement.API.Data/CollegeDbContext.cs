@@ -23,6 +23,7 @@ namespace CollegeManagement.API.Data
             modelBuilder.ApplyConfiguration(new RolestblEntityMap());
             modelBuilder.Entity<SPUserLoginValidationsEntity>().HasNoKey();
             modelBuilder.Entity<SPGetDepartmentdataEntity>().HasNoKey();
+            modelBuilder.Entity<SPInsertFacultyDetailsEntity>().HasNoKey();
             base.OnModelCreating(modelBuilder);
         }
 
@@ -38,7 +39,11 @@ namespace CollegeManagement.API.Data
 
         //Get DepatmentDetails DbSet
         public DbSet<SPGetDepartmentdataEntity> sPGetDepartmentdataEntities { get; set; }
+
+        //Post FacultyDetails DbSet
+        public DbSet<SPInsertFacultyDetailsEntity> sPInsertFacultyDetailsEntities { get; set; }
         
+
 
     }
 }

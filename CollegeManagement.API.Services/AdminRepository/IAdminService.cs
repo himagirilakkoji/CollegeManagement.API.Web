@@ -11,6 +11,7 @@ namespace CollegeManagement.API.Services.AdminRepository
     public interface IAdminService
     {
         Task<LoginResponceVM> PostLoginValidationAsync(LoginRequestPayload loginRequest);
+        Task<InsertFacultyResponceVM> InsertFacultyAsync(InsertFacultyPayload insertFacultyPayload);
         Task<DepartmentResponceVM> GetDepartmentDetails();
     }
 }

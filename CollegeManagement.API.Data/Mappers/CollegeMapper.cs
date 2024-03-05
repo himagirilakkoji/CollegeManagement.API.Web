@@ -25,6 +25,10 @@ namespace CollegeManagement.API.Data.Mappers
                 CreateMap<SPGetDepartmentdataEntity, DepartmentResponceVM>()
                   .ForMember(dest => dest.ErrorProcedure, src => src.MapFrom(x => x.ErrorProcedure))
                   .ForMember(dest => dest.Response, src => src.Ignore());
+
+                CreateMap<SPInsertFacultyDetailsEntity, InsertFacultyResponceVM>()
+                      .ForMember(dest => dest.ErrorProcedure, src => src.MapFrom(x => x.ErrorProcedure))
+                      .ForMember(dest => dest.Response, src => src.MapFrom(x => x.Response));
         }
     }
 }

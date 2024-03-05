@@ -18,6 +18,7 @@ namespace CollegeManagement.API.Web.DependencyRegistration
             services.AddScoped<IAdminService, AdminService>();
             services.AddScoped<UserLoginValidation>();
             services.AddScoped<GetDepartmentDetails>();
+            services.AddScoped<InsertFacultyDetails>();
             return services;
         }
     }

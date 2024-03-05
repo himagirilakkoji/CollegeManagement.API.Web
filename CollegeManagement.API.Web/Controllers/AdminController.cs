@@ -100,5 +100,44 @@ namespace CollegeManagement.API.Web.Controllers
             }
 
         }
+
+
+        // <summary>
+        // Post CreateFaculty Details
+        // </summary>
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status422UnprocessableEntity)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [HttpPost("CreateFaculty")]
+        public async Task<ActionResult<InsertFacultyResponceVM>> Post([FromBody] InsertFacultyPayload request)
+        {
+            try
+            {
+                _logger.LogInformation("Started processing {namespace} AdminController", typeof(AdminController).Namespace);
+                var result = await _mediator.Send<InsertFacultyResponceVM>(new PostFacultyDetails(request));
+
+                if (result.ErrorProcedure != null)
+                {
+                    _logger.LogInformation("Completed processing {namespace} AdminController", typeof(AdminController).Namespace);
+                    return StatusCode(StatusCodes.Status500InternalServerError);
+                }
+
+                if (result.Response == null)
+                {
+                    _logger.LogInformation("Completed processing {namespace} AdminController", typeof(AdminController).Namespace);
+                    return NotFound();
+                }
+
+                _logger.LogInformation("Completed processing {namespace} AdminController", typeof(AdminController).Namespace);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogInformation("Completed processing {namespace} AdminController", typeof(AdminController).Namespace);
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+
+        }
     }
 }
