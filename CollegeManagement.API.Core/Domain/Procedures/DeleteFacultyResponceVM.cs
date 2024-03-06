@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace CollegeManagement.API.Core.Domain.Procedures
 {
-    public class CoursesVM
+    public class DeleteFacultyResponceVM
     {
-        public int courseId { get; set; }
-        public string? courseName { get; set; }
-        public List<SubjectsVM>? subjects { get; set; }
+        public string? ErrorProcedure { get; set; }
+        public string? Response { get; set; }
     }
 }

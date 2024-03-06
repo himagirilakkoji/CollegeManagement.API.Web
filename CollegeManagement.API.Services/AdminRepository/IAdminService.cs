@@ -13,5 +13,7 @@ namespace CollegeManagement.API.Services.AdminRepository
         Task<LoginResponceVM> PostLoginValidationAsync(LoginRequestPayload loginRequest);
         Task<InsertFacultyResponceVM> InsertFacultyAsync(InsertFacultyPayload insertFacultyPayload);
         Task<DepartmentResponceVM> GetDepartmentDetails();
+        Task<FacultyListResponceVM> GetAllFacultyDetails();
+        Task<DeleteFacultyResponceVM> DeeleteFacultyById(Guid id);
     }
 }

@@ -8,6 +8,7 @@ namespace CollegeManagement.API.Core.Domain
 {
     public class SubjectRequest
     {
+        public string? CourseName { get; set; }
         public string? SubjectName { get; set; }
     }
 }

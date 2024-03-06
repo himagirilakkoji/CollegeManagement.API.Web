@@ -139,5 +139,83 @@ namespace CollegeManagement.API.Web.Controllers
             }
 
         }
+
+        // <summary>
+        // Return Facultylist Details
+        // </summary>
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status422UnprocessableEntity)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [HttpGet("GetAllFaculties")]
+        public async Task<ActionResult<FacultyListResponceVM>> GetAllFaculties()
+        {
+            try
+            {
+                _logger.LogInformation("Started processing {namespace} AdminController", typeof(AdminController).Namespace);
+                var result = await _mediator.Send<FacultyListResponceVM>(new GetAllFacultyList());
+
+                if (result.ErrorProcedure != null)
+                {
+                    _logger.LogInformation("Completed processing {namespace} AdminController", typeof(AdminController).Namespace);
+                    return StatusCode(StatusCodes.Status500InternalServerError);
+                }
+
+                if (result.Response == null)
+                {
+                    _logger.LogInformation("Completed processing {namespace} AdminController", typeof(AdminController).Namespace);
+                    return NotFound();
+                }
+
+                _logger.LogInformation("Completed processing {namespace} AdminController", typeof(AdminController).Namespace);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogInformation("Completed processing {namespace} AdminController", typeof(AdminController).Namespace);
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+
+        }
+
+        // <summary>
+        // Delete FacultyUser Details
+        // </summary>
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status422UnprocessableEntity)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [HttpDelete("DeleteCurrentFaculty/{Id}")]
+        public async Task<ActionResult<FacultyListResponceVM>> DeleteCurrentFaculty(Guid Id)
+        {
+            try
+            {
+                _logger.LogInformation("Started processing {namespace} AdminController", typeof(AdminController).Namespace);
+                var result = await _mediator.Send<DeleteFacultyResponceVM>(new DeleteCurrentFacultyById(Id));
+
+                if (result.ErrorProcedure != null)
+                {
+                    _logger.LogInformation("Completed processing {namespace} AdminController", typeof(AdminController).Namespace);
+                    return StatusCode(StatusCodes.Status500InternalServerError);
+                }
+
+                if (result.Response == null || result.Response.ToLower() == "faculty does not exist")
+                {
+                    _logger.LogInformation("Completed processing {namespace} AdminController", typeof(AdminController).Namespace);
+                    return NotFound();
+                }
+
+                _logger.LogInformation("Completed processing {namespace} AdminController", typeof(AdminController).Namespace);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogInformation("Completed processing {namespace} AdminController", typeof(AdminController).Namespace);
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+
+        }
+
+
     }
 }
