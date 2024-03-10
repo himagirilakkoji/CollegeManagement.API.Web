@@ -21,6 +21,7 @@ namespace CollegeManagement.API.Web.DependencyRegistration
             services.AddScoped<InsertFacultyDetails>();
             services.AddScoped<GetAllFacultyDetails>();
             services.AddScoped<DeleteFacultyById>();
+            services.AddScoped<UpdateFacultyById>();
             
             return services;
         }

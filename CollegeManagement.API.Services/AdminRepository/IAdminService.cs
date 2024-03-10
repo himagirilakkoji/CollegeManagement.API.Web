@@ -15,5 +15,6 @@ namespace CollegeManagement.API.Services.AdminRepository
         Task<DepartmentResponceVM> GetDepartmentDetails();
         Task<FacultyListResponceVM> GetAllFacultyDetails();
         Task<DeleteFacultyResponceVM> DeeleteFacultyById(Guid id);
+        Task<UpdateFacultyResponceVM> UpdateFacultyById(UpdateFacultyPayload updateFacultyPayload);
     }
 }

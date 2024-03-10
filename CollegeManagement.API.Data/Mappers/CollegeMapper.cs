@@ -37,6 +37,11 @@ namespace CollegeManagement.API.Data.Mappers
                 CreateMap<SPDeleteFacultyByIdEntity, DeleteFacultyResponceVM>()
                           .ForMember(dest => dest.ErrorProcedure, src => src.MapFrom(x => x.ErrorProcedure))
                           .ForMember(dest => dest.Response, src => src.MapFrom(x => x.Response));
+
+                CreateMap<SPUpdateFacultyByIdEntity, UpdateFacultyResponceVM>()
+                   .ForMember(dest => dest.ErrorProcedure, src => src.MapFrom(x => x.ErrorProcedure))
+                   .ForMember(dest => dest.Response, src => src.MapFrom(x => x.Response));
+
         }
     }
 }

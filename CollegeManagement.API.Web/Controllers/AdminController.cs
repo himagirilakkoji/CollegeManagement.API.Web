@@ -217,5 +217,56 @@ namespace CollegeManagement.API.Web.Controllers
         }
 
 
+        // <summary>
+        // Update FacultyUser Details
+        // </summary>
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status422UnprocessableEntity)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [HttpPut("UpdateCurrentFaculty/{Id}")]
+        public async Task<ActionResult<UpdateFacultyResponceVM>> UpdateCurrentFaculty([FromRoute] Guid Id, [FromBody] UpdateFacultyPayload updateFacultyPayload)
+        {
+            try
+            {
+                _logger.LogInformation("Started processing {namespace} AdminController", typeof(AdminController).Namespace);
+
+                updateFacultyPayload = new UpdateFacultyPayload
+                {
+                    Id        = Id,
+                    FirstName = updateFacultyPayload.FirstName,
+                    LastName  = updateFacultyPayload.LastName,
+                    UserName  = updateFacultyPayload.UserName,
+                    Email = updateFacultyPayload.Email,
+                    Dept      = updateFacultyPayload.Dept,
+                    courseRequests = updateFacultyPayload.courseRequests,
+                    subjectRequests = updateFacultyPayload.subjectRequests,
+                };
+
+                // Assuming a method to map the request to a command for the mediator
+                var result = await _mediator.Send<UpdateFacultyResponceVM>(new UpdateCurrentFacultyById(updateFacultyPayload));
+
+                if (result.ErrorProcedure != null)
+                {
+                    _logger.LogInformation("Completed processing {namespace} AdminController", typeof(AdminController).Namespace);
+                    return StatusCode(StatusCodes.Status500InternalServerError);
+                }
+
+                if (result.Response == null)
+                {
+                    _logger.LogInformation("Completed processing {namespace} AdminController", typeof(AdminController).Namespace);
+                    return NotFound();
+                }
+
+                _logger.LogInformation("Completed processing {namespace} AdminController", typeof(AdminController).Namespace);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogInformation("Completed processing {namespace} AdminController", typeof(AdminController).Namespace);
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+
+        }
     }
 }

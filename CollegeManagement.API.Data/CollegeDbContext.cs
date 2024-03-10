@@ -26,6 +26,7 @@ namespace CollegeManagement.API.Data
             modelBuilder.Entity<SPInsertFacultyDetailsEntity>().HasNoKey();
             modelBuilder.Entity<SPGetAllFacultyDataEntity>().HasNoKey();
             modelBuilder.Entity<SPDeleteFacultyByIdEntity>().HasNoKey();
+            modelBuilder.Entity<SPUpdateFacultyByIdEntity>().HasNoKey();
             base.OnModelCreating(modelBuilder);
         }
 
@@ -50,6 +51,9 @@ namespace CollegeManagement.API.Data
 
         //Delete CurrentFacultById DbSet
         public DbSet<SPDeleteFacultyByIdEntity> sPDeleteFacultyByIdEntities { get; set; }
+
+        //Update CurrentFacultById DbSet
+        public DbSet<SPUpdateFacultyByIdEntity> sPUpdateFacultyByIdEntities { get; set; }
 
     }
 }

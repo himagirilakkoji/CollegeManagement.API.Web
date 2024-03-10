@@ -18,11 +18,12 @@ namespace CollegeManagement.API.Services.AdminRepository
         private readonly GetAllFacultyDetails _getAllFacultyDetails;
         private readonly InsertFacultyDetails _insertFacultyDetails;
         private readonly DeleteFacultyById _deleteFacultyById;
+        private readonly UpdateFacultyById _updateFacultyById;
         private readonly StoreProcedures _storeProcedures;
         private readonly ILogger<AdminService> _logger;
 
         public AdminService(CollegeDbCommandContext collegeDbCommandContext, IMapper mapper , UserLoginValidation userLoginValidation, IOptions<StoreProcedures> storeProcedures, ILogger<AdminService> logger,
-               GetDepartmentDetails getDepartmentDetails, InsertFacultyDetails insertFacultyDetails, GetAllFacultyDetails getAllFacultyDetails, DeleteFacultyById deleteFacultyById)
+               GetDepartmentDetails getDepartmentDetails, InsertFacultyDetails insertFacultyDetails, GetAllFacultyDetails getAllFacultyDetails, DeleteFacultyById deleteFacultyById, UpdateFacultyById updateFacultyById)
         {
             _collegeDbCommandContext = collegeDbCommandContext;
             _mapper = mapper;
@@ -33,6 +34,7 @@ namespace CollegeManagement.API.Services.AdminRepository
             _logger = logger;
             _getAllFacultyDetails = getAllFacultyDetails;
             _deleteFacultyById = deleteFacultyById;
+            _updateFacultyById = updateFacultyById;
         }
 
         public async Task<LoginResponceVM> PostLoginValidationAsync(LoginRequestPayload payload)
@@ -63,6 +65,12 @@ namespace CollegeManagement.API.Services.AdminRepository
         {
             _logger.LogInformation("Started processing {namespace} AdminService", typeof(AdminService).Namespace);
             return await _deleteFacultyById.ExecuteStoredProcedure(_storeProcedures.DeleteFacultyById, id);
+        }
+
+        public async Task<UpdateFacultyResponceVM> UpdateFacultyById(UpdateFacultyPayload updateFacultyPayload)
+        {
+            _logger.LogInformation("Started processing {namespace} AdminService", typeof(AdminService).Namespace);
+            return await _updateFacultyById.ExecuteStoredProcedure(_storeProcedures.UpdateFacultyById, updateFacultyPayload);
         }
 
     }
