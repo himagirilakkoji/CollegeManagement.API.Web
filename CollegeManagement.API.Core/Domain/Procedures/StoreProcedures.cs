@@ -14,5 +14,8 @@ namespace CollegeManagement.API.Core.Domain.Procedures
         public string? GetAllFaculties { get; set; }
         public string? DeleteFacultyById { get; set; }
         public string? UpdateFacultyById { get; set; }
+        public string? InsertStudentDetails { get; set; }
+        public string? GetAllStudents { get; set; }
+        public string? DeleteStudentById { get; set; }
     }
 }

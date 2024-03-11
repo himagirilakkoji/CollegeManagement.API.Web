@@ -37,7 +37,7 @@ namespace CollegeManagement.API.Data.QueriesHandler
                 result.Response = facultyDetails;
             }
 
-            _logger.LogInformation("Completed processing {namespace} GetDepartmentDetails", typeof(GetDepartmentDetails).Namespace);
+            _logger.LogInformation("Completed processing {namespace} GetAllFacultyDetails", typeof(GetAllFacultyDetails).Namespace);
             return result;
         }
 

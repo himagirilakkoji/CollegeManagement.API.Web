@@ -19,11 +19,15 @@ namespace CollegeManagement.API.Services.AdminRepository
         private readonly InsertFacultyDetails _insertFacultyDetails;
         private readonly DeleteFacultyById _deleteFacultyById;
         private readonly UpdateFacultyById _updateFacultyById;
+        private readonly InsertStudentDetails _insertStudentDetails;
+        private readonly GetAllStudentDetails _getAllStudentDetails;
+        private readonly DeleteStudentById _deleteStudentById;
         private readonly StoreProcedures _storeProcedures;
         private readonly ILogger<AdminService> _logger;
 
         public AdminService(CollegeDbCommandContext collegeDbCommandContext, IMapper mapper , UserLoginValidation userLoginValidation, IOptions<StoreProcedures> storeProcedures, ILogger<AdminService> logger,
-               GetDepartmentDetails getDepartmentDetails, InsertFacultyDetails insertFacultyDetails, GetAllFacultyDetails getAllFacultyDetails, DeleteFacultyById deleteFacultyById, UpdateFacultyById updateFacultyById)
+               GetDepartmentDetails getDepartmentDetails, InsertFacultyDetails insertFacultyDetails, GetAllFacultyDetails getAllFacultyDetails, DeleteFacultyById deleteFacultyById, UpdateFacultyById updateFacultyById, 
+               InsertStudentDetails insertStudentDetails, GetAllStudentDetails getAllStudentDetails, DeleteStudentById deleteStudentById)
         {
             _collegeDbCommandContext = collegeDbCommandContext;
             _mapper = mapper;
@@ -35,6 +39,9 @@ namespace CollegeManagement.API.Services.AdminRepository
             _getAllFacultyDetails = getAllFacultyDetails;
             _deleteFacultyById = deleteFacultyById;
             _updateFacultyById = updateFacultyById;
+            _insertStudentDetails = insertStudentDetails;
+            _getAllStudentDetails = getAllStudentDetails;
+            _deleteStudentById = deleteStudentById;
         }
 
         public async Task<LoginResponceVM> PostLoginValidationAsync(LoginRequestPayload payload)
@@ -71,6 +78,24 @@ namespace CollegeManagement.API.Services.AdminRepository
         {
             _logger.LogInformation("Started processing {namespace} AdminService", typeof(AdminService).Namespace);
             return await _updateFacultyById.ExecuteStoredProcedure(_storeProcedures.UpdateFacultyById, updateFacultyPayload);
+        }
+
+        public async Task<InsertStudentResponceVM> InsertStudentAsync(InsertStudentPayload insertStudentPayload)
+        {
+            _logger.LogInformation("Started processing {namespace} AdminService", typeof(AdminService).Namespace);
+            return await _insertStudentDetails.ExecuteStoredProcedure(_storeProcedures.InsertStudentDetails, insertStudentPayload);
+        }
+
+        public async Task<List<StudentListResponceVM>> GetAllStudentDetails()
+        {
+            _logger.LogInformation("Started processing {namespace} AdminService", typeof(AdminService).Namespace);
+            return await _getAllStudentDetails.ExecuteStoredProcedure(_storeProcedures.GetAllStudents);
+        }
+
+        public async Task<DeleteStudentResponceVM> DeleteStudentById(int id)
+        {
+            _logger.LogInformation("Started processing {namespace} AdminService", typeof(AdminService).Namespace);
+            return await _deleteStudentById.ExecuteStoredProcedure(_storeProcedures.DeleteStudentById, id);
         }
 
     }
