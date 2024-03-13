@@ -22,12 +22,15 @@ namespace CollegeManagement.API.Services.AdminRepository
         private readonly InsertStudentDetails _insertStudentDetails;
         private readonly GetAllStudentDetails _getAllStudentDetails;
         private readonly DeleteStudentById _deleteStudentById;
+        private readonly InsertStudentExamMarksDetails _insertStudentExamMarksDetails;
+        private readonly GetFacultyCourseLevelReportByGuid _getFacultyCourseLevelReportByGuid;
         private readonly StoreProcedures _storeProcedures;
         private readonly ILogger<AdminService> _logger;
 
         public AdminService(CollegeDbCommandContext collegeDbCommandContext, IMapper mapper , UserLoginValidation userLoginValidation, IOptions<StoreProcedures> storeProcedures, ILogger<AdminService> logger,
                GetDepartmentDetails getDepartmentDetails, InsertFacultyDetails insertFacultyDetails, GetAllFacultyDetails getAllFacultyDetails, DeleteFacultyById deleteFacultyById, UpdateFacultyById updateFacultyById, 
-               InsertStudentDetails insertStudentDetails, GetAllStudentDetails getAllStudentDetails, DeleteStudentById deleteStudentById)
+               InsertStudentDetails insertStudentDetails, GetAllStudentDetails getAllStudentDetails, DeleteStudentById deleteStudentById, InsertStudentExamMarksDetails insertStudentExamMarksDetails,
+               GetFacultyCourseLevelReportByGuid getFacultyCourseLevelReportByGuid)
         {
             _collegeDbCommandContext = collegeDbCommandContext;
             _mapper = mapper;
@@ -42,6 +45,8 @@ namespace CollegeManagement.API.Services.AdminRepository
             _insertStudentDetails = insertStudentDetails;
             _getAllStudentDetails = getAllStudentDetails;
             _deleteStudentById = deleteStudentById;
+            _insertStudentExamMarksDetails = insertStudentExamMarksDetails;
+            _getFacultyCourseLevelReportByGuid = getFacultyCourseLevelReportByGuid;
         }
 
         public async Task<LoginResponceVM> PostLoginValidationAsync(LoginRequestPayload payload)
@@ -97,6 +102,16 @@ namespace CollegeManagement.API.Services.AdminRepository
             _logger.LogInformation("Started processing {namespace} AdminService", typeof(AdminService).Namespace);
             return await _deleteStudentById.ExecuteStoredProcedure(_storeProcedures.DeleteStudentById, id);
         }
+        public async Task<InsertStudentMarksResponceVM> InsertStudentExamMarksAsync(InsertStudentMarksPayload insertStudentMarksPayload)
+        {
+            _logger.LogInformation("Started processing {namespace} AdminService", typeof(AdminService).Namespace);
+            return await _insertStudentExamMarksDetails.ExecuteStoredProcedure(_storeProcedures.InsertExamMarksDetails, insertStudentMarksPayload);
+        }
 
+        public async Task<List<CourseLevelReportResponceVM>> GetCourseLevelReport(Guid guid)
+        {
+            _logger.LogInformation("Started processing {namespace} AdminService", typeof(AdminService).Namespace);
+            return await _getFacultyCourseLevelReportByGuid.ExecuteStoredProcedure(_storeProcedures.CalculateCourseLevelReport, guid);
+        }
     }
 }

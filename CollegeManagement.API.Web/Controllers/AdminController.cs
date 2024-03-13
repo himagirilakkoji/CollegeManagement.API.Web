@@ -340,7 +340,6 @@ namespace CollegeManagement.API.Web.Controllers
 
         }
 
-        //add
         // <summary>
         // Delete StudentUser Details
         // </summary>
@@ -363,6 +362,77 @@ namespace CollegeManagement.API.Web.Controllers
                 }
 
                 if (result.Response == null || result.Response.ToLower() == "faculty does not exist")
+                {
+                    _logger.LogInformation("Completed processing {namespace} AdminController", typeof(AdminController).Namespace);
+                    return NotFound();
+                }
+
+                _logger.LogInformation("Completed processing {namespace} AdminController", typeof(AdminController).Namespace);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogInformation("Completed processing {namespace} AdminController", typeof(AdminController).Namespace);
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+
+        }
+
+
+        // <summary>
+        // Save StudentExamMarks
+        // </summary>
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status422UnprocessableEntity)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [HttpPost("SaveStudentMarks")]
+        public async Task<ActionResult<InsertStudentMarksResponceVM>> SaveStudentMarks([FromBody] InsertStudentMarksPayload request)
+        {
+            try
+            {
+                _logger.LogInformation("Started processing {namespace} AdminController", typeof(AdminController).Namespace);
+                var result = await _mediator.Send<InsertStudentMarksResponceVM>(new PostStudentExamMarksDetails(request));
+
+                if (result.ErrorProcedure != null)
+                {
+                    _logger.LogInformation("Completed processing {namespace} AdminController", typeof(AdminController).Namespace);
+                    return StatusCode(StatusCodes.Status500InternalServerError);
+                }
+
+                if (result.Response == null)
+                {
+                    _logger.LogInformation("Completed processing {namespace} AdminController", typeof(AdminController).Namespace);
+                    return NotFound();
+                }
+
+                _logger.LogInformation("Completed processing {namespace} AdminController", typeof(AdminController).Namespace);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogInformation("Completed processing {namespace} AdminController", typeof(AdminController).Namespace);
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+
+        }
+
+        // <summary>
+        // Return CourseLevelReport Details
+        // </summary>
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status422UnprocessableEntity)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [HttpGet("CourseLevelReport/{guid}")]
+        public async Task<ActionResult<List<CourseLevelReportResponceVM>>> GetCourseLevelReportByFacultyId(Guid guid)
+        {
+            try
+            {
+                _logger.LogInformation("Started processing {namespace} AdminController", typeof(AdminController).Namespace);
+                var result = await _mediator.Send<List<CourseLevelReportResponceVM>>(new GetCourseLevelReportList(guid));
+
+                if (!result.Any())
                 {
                     _logger.LogInformation("Completed processing {namespace} AdminController", typeof(AdminController).Namespace);
                     return NotFound();

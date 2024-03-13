@@ -35,9 +35,14 @@ namespace CollegeManagement.API.Data.QueriesHandler
             //Calling stored procedure 
             var entity = await _collegeDbQueryContext.sPGetAllStudentDataEntities.FromSqlInterpolated($@"exec {spname}").ToListAsync();
             var result = new List<StudentListResponceVM>();
+            
             foreach (var item in entity)
             {
-                var studentCourses = JsonConvert.DeserializeObject<List<StudentCourseVM>>(item.studentCourseEntities);
+                var studentCourses = new List<StudentCourseVM>();
+                if (item.studentCourseEntities != null)
+                {
+                    studentCourses = JsonConvert.DeserializeObject<List<StudentCourseVM>>(item.studentCourseEntities);
+                }
 
                 result.Add(new StudentListResponceVM()
                 {

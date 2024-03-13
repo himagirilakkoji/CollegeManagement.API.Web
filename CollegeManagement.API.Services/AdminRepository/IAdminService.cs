@@ -19,5 +19,7 @@ namespace CollegeManagement.API.Services.AdminRepository
         Task<InsertStudentResponceVM> InsertStudentAsync(InsertStudentPayload insertStudentPayload);
         Task<List<StudentListResponceVM>> GetAllStudentDetails();
         Task<DeleteStudentResponceVM> DeleteStudentById(int id);
+        Task<InsertStudentMarksResponceVM> InsertStudentExamMarksAsync(InsertStudentMarksPayload insertStudentMarksPayload);
+        Task<List<CourseLevelReportResponceVM>> GetCourseLevelReport(Guid id);
     }
 }

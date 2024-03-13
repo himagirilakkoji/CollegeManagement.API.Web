@@ -30,6 +30,8 @@ namespace CollegeManagement.API.Data
             modelBuilder.Entity<SPInsertStudentDetailsEntity>().HasNoKey();
             modelBuilder.Entity<SPGetAllStudentDataEntity>().HasNoKey();
             modelBuilder.Entity<SPDeleteStudentByIdEntity>().HasNoKey();
+            modelBuilder.Entity<SPInsertStudentExamMarksDetailsEntity>().HasNoKey();
+            modelBuilder.Entity<SPCourseLevelReportEntity>().HasNoKey();
             base.OnModelCreating(modelBuilder);
         }
 
@@ -66,6 +68,12 @@ namespace CollegeManagement.API.Data
 
         //Delete CurrentStudentById DbSet
         public DbSet<SPDeleteStudentByIdEntity> sPDeleteStudentByIdEntities { get; set; }
+
+        //Post StudentDetails DbSet
+        public DbSet<SPInsertStudentExamMarksDetailsEntity> sPInsertStudentExamMarksDetailsEntities { get; set; }
+
+        //Get CourseLevelReport DbSet
+        public DbSet<SPCourseLevelReportEntity> sPCourseLevelReportEntities { get; set; }
 
     }
 }

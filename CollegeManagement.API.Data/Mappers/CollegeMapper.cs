@@ -18,17 +18,17 @@ namespace CollegeManagement.API.Data.Mappers
                 CreateMap<RolesEntity,RoleDetailsVM>().ReverseMap();
 
                 CreateMap<SPUserLoginValidationsEntity,LoginResponceVM>()
-                  .ForMember(dest => dest.ResponseCode, src => src.MapFrom(x => x.ResponseCode))
-                  .ForMember(dest => dest.ErrorProcedure, src => src.MapFrom(x => x.ErrorProcedure))
-                  .ForMember(dest => dest.adminDetails, src => src.Ignore());
+                          .ForMember(dest => dest.ResponseCode, src => src.MapFrom(x => x.ResponseCode))
+                          .ForMember(dest => dest.ErrorProcedure, src => src.MapFrom(x => x.ErrorProcedure))
+                          .ForMember(dest => dest.adminDetails, src => src.Ignore());
 
                 CreateMap<SPGetDepartmentdataEntity, DepartmentResponceVM>()
-                  .ForMember(dest => dest.ErrorProcedure, src => src.MapFrom(x => x.ErrorProcedure))
-                  .ForMember(dest => dest.Response, src => src.Ignore());
+                          .ForMember(dest => dest.ErrorProcedure, src => src.MapFrom(x => x.ErrorProcedure))
+                          .ForMember(dest => dest.Response, src => src.Ignore());
 
                 CreateMap<SPInsertFacultyDetailsEntity, InsertFacultyResponceVM>()
-                      .ForMember(dest => dest.ErrorProcedure, src => src.MapFrom(x => x.ErrorProcedure))
-                      .ForMember(dest => dest.Response, src => src.MapFrom(x => x.Response));
+                          .ForMember(dest => dest.ErrorProcedure, src => src.MapFrom(x => x.ErrorProcedure))
+                          .ForMember(dest => dest.Response, src => src.MapFrom(x => x.Response));
 
                 CreateMap<SPGetAllFacultyDataEntity, FacultyListResponceVM>()
                           .ForMember(dest => dest.ErrorProcedure, src => src.MapFrom(x => x.ErrorProcedure))
@@ -49,6 +49,12 @@ namespace CollegeManagement.API.Data.Mappers
                 CreateMap<SPDeleteStudentByIdEntity, DeleteStudentResponceVM>()
                           .ForMember(dest => dest.ErrorProcedure, src => src.MapFrom(x => x.ErrorProcedure))
                           .ForMember(dest => dest.Response, src => src.MapFrom(x => x.Response));
+
+                CreateMap<SPInsertStudentExamMarksDetailsEntity, InsertStudentMarksResponceVM>()
+                          .ForMember(dest => dest.ErrorProcedure, src => src.MapFrom(x => x.ErrorProcedure))
+                          .ForMember(dest => dest.Response, src => src.MapFrom(x => x.Response));
+
+                CreateMap<SPCourseLevelReportEntity, CourseLevelReportResponceVM>().ReverseMap();
         }
     }
 }
