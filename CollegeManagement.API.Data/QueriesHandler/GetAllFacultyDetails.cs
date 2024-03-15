@@ -23,13 +23,13 @@ namespace CollegeManagement.API.Data.QueriesHandler
             _logger = logger;
         }
 
-        public async Task<FacultyListResponceVM> ExecuteStoredProcedure(string spname)
+        public async Task<FacultyListResponseVM> ExecuteStoredProcedure(string spname)
         {
             _logger.LogInformation("Started processing {namespace} GetAllFacultyDetails", typeof(GetAllFacultyDetails).Namespace);
 
             //Calling stored procedure 
             var entity = await _collegeDbQueryContext.Set<SPGetAllFacultyDataEntity>().FromSqlInterpolated($@"exec {spname}").ToListAsync();
-            var result = _mapper.Map<FacultyListResponceVM>(entity.FirstOrDefault());
+            var result = _mapper.Map<FacultyListResponseVM>(entity.FirstOrDefault());
 
             if (entity.FirstOrDefault().Response != null)
             {

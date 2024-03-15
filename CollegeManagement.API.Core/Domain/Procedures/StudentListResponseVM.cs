@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CollegeManagement.API.Core.Domain.Procedures
 {
-    public class StudentListResponceVM
+    public class StudentListResponseVM
     {
         public int StudentID { get; set; }
         public string? FirstName { get; set; }

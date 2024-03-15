@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CollegeManagement.API.Core.Domain.Procedures
+namespace CollegeManagement.API.Data.Entities
 {
-    public class CourseLevelReportResponceVM
+    public class SPSubjectLevelReportEntity
     {
-        public int CourseID { get; set; }
+        public int SubjectID { get; set; }
         public string? Name { get; set; }
         public decimal? AverageMarks { get; set; }
     }

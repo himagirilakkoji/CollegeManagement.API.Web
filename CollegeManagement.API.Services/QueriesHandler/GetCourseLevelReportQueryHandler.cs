@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace CollegeManagement.API.Services.QueriesHandler
 {
-    public class GetCourseLevelReportQueryHandler : IRequestHandler<GetCourseLevelReportList, List<CourseLevelReportResponceVM>>
+    public class GetCourseLevelReportQueryHandler : IRequestHandler<GetCourseLevelReportList, List<CourseLevelReportResponseVM>>
     {
         private readonly IAdminService _adminService;
         private readonly ILogger<GetCourseLevelReportQueryHandler> _logger;
@@ -21,7 +21,7 @@ namespace CollegeManagement.API.Services.QueriesHandler
             _adminService = adminService;
             _logger = logger;
         }
-        public async Task<List<CourseLevelReportResponceVM>> Handle(GetCourseLevelReportList request, CancellationToken cancellationToken)
+        public async Task<List<CourseLevelReportResponseVM>> Handle(GetCourseLevelReportList request, CancellationToken cancellationToken)
         {
             _logger.LogInformation("Started processing {namespace} GetCourseLevelReportQueryHandler", typeof(GetCourseLevelReportQueryHandler).Namespace);
             return await _adminService.GetCourseLevelReport(request.id);

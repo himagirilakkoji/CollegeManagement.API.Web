@@ -1,4 +1,6 @@
-﻿using CollegeManagement.API.Core.Domain.Procedures;
+﻿// Ignore Spelling: API
+
+using CollegeManagement.API.Core.Domain.Procedures;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -8,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace CollegeManagement.API.Core.Commands
 {
-    public record DeleteCurrentFacultyById(Guid id) : IRequest<DeleteFacultyResponceVM>
+    public record DeleteCurrentFacultyById(Guid id) : IRequest<DeleteFacultyResponseVM>
     {
     }
 }

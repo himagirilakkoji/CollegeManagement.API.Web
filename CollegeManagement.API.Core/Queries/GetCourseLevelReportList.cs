@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace CollegeManagement.API.Core.Queries
 {
-    public record GetCourseLevelReportList(Guid id) : IRequest<List<CourseLevelReportResponceVM>>
+    public record GetCourseLevelReportList(Guid id) : IRequest<List<CourseLevelReportResponseVM>>
     {
     }
 }

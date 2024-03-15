@@ -24,13 +24,14 @@ namespace CollegeManagement.API.Services.AdminRepository
         private readonly DeleteStudentById _deleteStudentById;
         private readonly InsertStudentExamMarksDetails _insertStudentExamMarksDetails;
         private readonly GetFacultyCourseLevelReportByGuid _getFacultyCourseLevelReportByGuid;
+        private readonly GetFacultySubjectLevelReportByGuid _getFacultySubjectLevelReportByGuid;
         private readonly StoreProcedures _storeProcedures;
         private readonly ILogger<AdminService> _logger;
 
         public AdminService(CollegeDbCommandContext collegeDbCommandContext, IMapper mapper , UserLoginValidation userLoginValidation, IOptions<StoreProcedures> storeProcedures, ILogger<AdminService> logger,
                GetDepartmentDetails getDepartmentDetails, InsertFacultyDetails insertFacultyDetails, GetAllFacultyDetails getAllFacultyDetails, DeleteFacultyById deleteFacultyById, UpdateFacultyById updateFacultyById, 
                InsertStudentDetails insertStudentDetails, GetAllStudentDetails getAllStudentDetails, DeleteStudentById deleteStudentById, InsertStudentExamMarksDetails insertStudentExamMarksDetails,
-               GetFacultyCourseLevelReportByGuid getFacultyCourseLevelReportByGuid)
+               GetFacultyCourseLevelReportByGuid getFacultyCourseLevelReportByGuid, GetFacultySubjectLevelReportByGuid getFacultySubjectLevelReportByGuid)
         {
             _collegeDbCommandContext = collegeDbCommandContext;
             _mapper = mapper;
@@ -47,71 +48,79 @@ namespace CollegeManagement.API.Services.AdminRepository
             _deleteStudentById = deleteStudentById;
             _insertStudentExamMarksDetails = insertStudentExamMarksDetails;
             _getFacultyCourseLevelReportByGuid = getFacultyCourseLevelReportByGuid;
+            _getFacultySubjectLevelReportByGuid = getFacultySubjectLevelReportByGuid;
+
         }
 
-        public async Task<LoginResponceVM> PostLoginValidationAsync(LoginRequestPayload payload)
+        public async Task<LoginResponseVM> PostLoginValidationAsync(LoginRequestPayload payload)
         {
             _logger.LogInformation("Started processing {namespace} AdminService", typeof(AdminService).Namespace);
             return await _userLoginValidation.ExecuteStoredProcedure(_storeProcedures.UserLoginValidations , payload);
         }
 
-        public async Task<DepartmentResponceVM> GetDepartmentDetails()
+        public async Task<DepartmentResponseVM> GetDepartmentDetails()
         {
             _logger.LogInformation("Started processing {namespace} AdminService", typeof(AdminService).Namespace);
             return await _getDepartmentDetails.ExecuteStoredProcedure(_storeProcedures.GetDepartmentdata);
         }
 
-        public async Task<FacultyListResponceVM> GetAllFacultyDetails()
+        public async Task<FacultyListResponseVM> GetAllFacultyDetails()
         {
             _logger.LogInformation("Started processing {namespace} AdminService", typeof(AdminService).Namespace);
             return await _getAllFacultyDetails.ExecuteStoredProcedure(_storeProcedures.GetAllFaculties);
         }
 
-        public async Task<InsertFacultyResponceVM> InsertFacultyAsync(InsertFacultyPayload insertFacultyPayload)
+        public async Task<InsertFacultyResponseVM> InsertFacultyAsync(InsertFacultyPayload insertFacultyPayload)
         {
             _logger.LogInformation("Started processing {namespace} AdminService", typeof(AdminService).Namespace);
             return await _insertFacultyDetails.ExecuteStoredProcedure(_storeProcedures.InsertFacultyDetails, insertFacultyPayload);
         }
 
-        public async Task<DeleteFacultyResponceVM> DeeleteFacultyById(Guid id)
+        public async Task<DeleteFacultyResponseVM> DeeleteFacultyById(Guid id)
         {
             _logger.LogInformation("Started processing {namespace} AdminService", typeof(AdminService).Namespace);
             return await _deleteFacultyById.ExecuteStoredProcedure(_storeProcedures.DeleteFacultyById, id);
         }
 
-        public async Task<UpdateFacultyResponceVM> UpdateFacultyById(UpdateFacultyPayload updateFacultyPayload)
+        public async Task<UpdateFacultyResponseVM> UpdateFacultyById(UpdateFacultyPayload updateFacultyPayload)
         {
             _logger.LogInformation("Started processing {namespace} AdminService", typeof(AdminService).Namespace);
             return await _updateFacultyById.ExecuteStoredProcedure(_storeProcedures.UpdateFacultyById, updateFacultyPayload);
         }
 
-        public async Task<InsertStudentResponceVM> InsertStudentAsync(InsertStudentPayload insertStudentPayload)
+        public async Task<InsertStudentResponseVM> InsertStudentAsync(InsertStudentPayload insertStudentPayload)
         {
             _logger.LogInformation("Started processing {namespace} AdminService", typeof(AdminService).Namespace);
             return await _insertStudentDetails.ExecuteStoredProcedure(_storeProcedures.InsertStudentDetails, insertStudentPayload);
         }
 
-        public async Task<List<StudentListResponceVM>> GetAllStudentDetails()
+        public async Task<List<StudentListResponseVM>> GetAllStudentDetails()
         {
             _logger.LogInformation("Started processing {namespace} AdminService", typeof(AdminService).Namespace);
             return await _getAllStudentDetails.ExecuteStoredProcedure(_storeProcedures.GetAllStudents);
         }
 
-        public async Task<DeleteStudentResponceVM> DeleteStudentById(int id)
+        public async Task<DeleteStudentResponseVM> DeleteStudentById(int id)
         {
             _logger.LogInformation("Started processing {namespace} AdminService", typeof(AdminService).Namespace);
             return await _deleteStudentById.ExecuteStoredProcedure(_storeProcedures.DeleteStudentById, id);
         }
-        public async Task<InsertStudentMarksResponceVM> InsertStudentExamMarksAsync(InsertStudentMarksPayload insertStudentMarksPayload)
+        public async Task<InsertStudentMarksResponseVM> InsertStudentExamMarksAsync(InsertStudentMarksPayload insertStudentMarksPayload)
         {
             _logger.LogInformation("Started processing {namespace} AdminService", typeof(AdminService).Namespace);
             return await _insertStudentExamMarksDetails.ExecuteStoredProcedure(_storeProcedures.InsertExamMarksDetails, insertStudentMarksPayload);
         }
 
-        public async Task<List<CourseLevelReportResponceVM>> GetCourseLevelReport(Guid guid)
+        public async Task<List<CourseLevelReportResponseVM>> GetCourseLevelReport(Guid guid)
         {
             _logger.LogInformation("Started processing {namespace} AdminService", typeof(AdminService).Namespace);
             return await _getFacultyCourseLevelReportByGuid.ExecuteStoredProcedure(_storeProcedures.CalculateCourseLevelReport, guid);
+        }
+
+        public async Task<List<SubjectLevelReportResponseVM>> GetSubjectLevelReport(Guid guid)
+        {
+            _logger.LogInformation("Started processing {namespace} AdminService", typeof(AdminService).Namespace);
+            return await _getFacultySubjectLevelReportByGuid.ExecuteStoredProcedure(_storeProcedures.CalculateSubjectLevelReport, guid);
         }
     }
 }

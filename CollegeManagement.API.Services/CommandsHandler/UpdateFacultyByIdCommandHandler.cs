@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace CollegeManagement.API.Services.CommandsHandler
 {
-    public class UpdateFacultyByIdCommandHandler : IRequestHandler<UpdateCurrentFacultyById, UpdateFacultyResponceVM>
+    public class UpdateFacultyByIdCommandHandler : IRequestHandler<UpdateCurrentFacultyById, UpdateFacultyResponseVM>
     {
         private readonly IAdminService _adminService;
         private readonly ILogger<UpdateFacultyByIdCommandHandler> _logger;
@@ -22,7 +22,7 @@ namespace CollegeManagement.API.Services.CommandsHandler
             _logger = logger;
         }
 
-        public async Task<UpdateFacultyResponceVM> Handle(UpdateCurrentFacultyById request, CancellationToken cancellationToken)
+        public async Task<UpdateFacultyResponseVM> Handle(UpdateCurrentFacultyById request, CancellationToken cancellationToken)
         {
             _logger.LogInformation("Started processing {namespace} UpdateFacultyByIdCommandHandler", typeof(UpdateFacultyByIdCommandHandler).Namespace);
             return await _adminService.UpdateFacultyById(request.UpdateFacultyPayload);

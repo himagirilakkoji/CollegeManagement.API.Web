@@ -28,13 +28,13 @@ namespace CollegeManagement.API.Data.QueriesHandler
             _logger = logger;
         }
 
-        public async Task<List<StudentListResponceVM>> ExecuteStoredProcedure(string spname)
+        public async Task<List<StudentListResponseVM>> ExecuteStoredProcedure(string spname)
         {
             _logger.LogInformation("Started processing {namespace} GetAllStudentDetails", typeof(GetAllStudentDetails).Namespace);
 
             //Calling stored procedure 
             var entity = await _collegeDbQueryContext.sPGetAllStudentDataEntities.FromSqlInterpolated($@"exec {spname}").ToListAsync();
-            var result = new List<StudentListResponceVM>();
+            var result = new List<StudentListResponseVM>();
             
             foreach (var item in entity)
             {
@@ -44,7 +44,7 @@ namespace CollegeManagement.API.Data.QueriesHandler
                     studentCourses = JsonConvert.DeserializeObject<List<StudentCourseVM>>(item.studentCourseEntities);
                 }
 
-                result.Add(new StudentListResponceVM()
+                result.Add(new StudentListResponseVM()
                 {
                     StudentID = item.StudentID,
                     FirstName = item.FirstName,

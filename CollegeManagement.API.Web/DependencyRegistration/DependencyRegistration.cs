@@ -27,6 +27,7 @@ namespace CollegeManagement.API.Web.DependencyRegistration
             services.AddScoped<DeleteStudentById>();
             services.AddScoped<InsertStudentExamMarksDetails>();
             services.AddScoped<GetFacultyCourseLevelReportByGuid>();
+            services.AddScoped<GetFacultySubjectLevelReportByGuid>();
             return services;
         }
     }

@@ -8,7 +8,7 @@ using Microsoft.Extensions.Logging;
 
 namespace CollegeManagement.API.Services.CommandsHandler
 {
-    public class PostFacultyCommandHandler : IRequestHandler<PostFacultyDetails, InsertFacultyResponceVM>
+    public class PostFacultyCommandHandler : IRequestHandler<PostFacultyDetails, InsertFacultyResponseVM>
     {
         private readonly IAdminService _adminService;
         private readonly ILogger<PostFacultyCommandHandler> _logger;
@@ -18,7 +18,7 @@ namespace CollegeManagement.API.Services.CommandsHandler
             _logger = logger;
         }
 
-        public async Task<InsertFacultyResponceVM> Handle(PostFacultyDetails request, CancellationToken cancellationToken)
+        public async Task<InsertFacultyResponseVM> Handle(PostFacultyDetails request, CancellationToken cancellationToken)
         {
             _logger.LogInformation("Started processing {namespace} PostFacultyCommandHandler", typeof(PostFacultyCommandHandler).Namespace);
             return await _adminService.InsertFacultyAsync(request.InsertFacultyPayload);

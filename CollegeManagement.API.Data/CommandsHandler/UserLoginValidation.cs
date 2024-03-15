@@ -28,13 +28,13 @@ namespace CollegeManagement.API.Data.CommandsHandler
             _logger = logger;
         }
 
-        public async Task<LoginResponceVM> ExecuteStoredProcedure(string spname, LoginRequestPayload payload)
+        public async Task<LoginResponseVM> ExecuteStoredProcedure(string spname, LoginRequestPayload payload)
         {
                 _logger.LogInformation("Started processing {namespace} UserLoginValidation", typeof(UserLoginValidation).Namespace);
                 
                 //Calling stored procedure 
                 var entity = await _collegeDbCommandContext.Set<SPUserLoginValidationsEntity>().FromSqlInterpolated($@"exec {spname} @EmailId = {payload.EmailID} , @Password={payload.Password} ").ToListAsync();
-                var result = _mapper.Map<LoginResponceVM>(entity.FirstOrDefault());
+                var result = _mapper.Map<LoginResponseVM>(entity.FirstOrDefault());
 
                 if (entity.FirstOrDefault().Response != null)
                 {

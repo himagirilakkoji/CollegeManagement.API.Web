@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace CollegeManagement.API.Services.QueriesHandler
 {
-    public class GetDepartmentDetailsQueryHandler : IRequestHandler<GetDepartmentData, DepartmentResponceVM>
+    public class GetDepartmentDetailsQueryHandler : IRequestHandler<GetDepartmentData, DepartmentResponseVM>
     {
         private readonly IAdminService _adminService;
         private readonly ILogger<GetDepartmentDetailsQueryHandler> _logger;
@@ -23,7 +23,7 @@ namespace CollegeManagement.API.Services.QueriesHandler
             _logger = logger;
         }
 
-        public async Task<DepartmentResponceVM> Handle(GetDepartmentData request, CancellationToken cancellationToken)
+        public async Task<DepartmentResponseVM> Handle(GetDepartmentData request, CancellationToken cancellationToken)
         {
             _logger.LogInformation("Started processing {namespace} GetDepartmentDetailsQueryHandler", typeof(GetDepartmentDetailsQueryHandler).Namespace);
             return await _adminService.GetDepartmentDetails();

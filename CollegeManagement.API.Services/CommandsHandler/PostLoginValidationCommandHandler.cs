@@ -13,7 +13,7 @@ using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace CollegeManagement.API.Services.CommandsHandler
 {
-    public class PostLoginValidationCommandHandler : IRequestHandler<PostLoginValidation, LoginResponceVM>
+    public class PostLoginValidationCommandHandler : IRequestHandler<PostLoginValidation, LoginResponseVM>
     {
         private readonly IAdminService _adminService;
         private readonly ILogger<PostLoginValidationCommandHandler> _logger;
@@ -23,7 +23,7 @@ namespace CollegeManagement.API.Services.CommandsHandler
             _logger = logger;
         }
 
-        public async Task<LoginResponceVM> Handle(PostLoginValidation request, CancellationToken cancellationToken)
+        public async Task<LoginResponseVM> Handle(PostLoginValidation request, CancellationToken cancellationToken)
         {
             _logger.LogInformation("Started processing {namespace} PostLoginValidationCommandHandler", typeof(PostLoginValidationCommandHandler).Namespace);
             return await _adminService.PostLoginValidationAsync(request.LoginRequest);       

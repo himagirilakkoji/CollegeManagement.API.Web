@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace CollegeManagement.API.Core.Commands
 {
-    public record UpdateCurrentFacultyById(UpdateFacultyPayload UpdateFacultyPayload) : IRequest<UpdateFacultyResponceVM>
+    public record UpdateCurrentFacultyById(UpdateFacultyPayload UpdateFacultyPayload) : IRequest<UpdateFacultyResponseVM>
     {
     }
 }

@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace CollegeManagement.API.Services.CommandsHandler
 {
-    public class PostStudentCommandHandler : IRequestHandler<PostStudentDetails, InsertStudentResponceVM>
+    public class PostStudentCommandHandler : IRequestHandler<PostStudentDetails, InsertStudentResponseVM>
     {
         private readonly IAdminService _adminService;
         private readonly ILogger<PostFacultyCommandHandler> _logger;
@@ -21,7 +21,7 @@ namespace CollegeManagement.API.Services.CommandsHandler
             _logger = logger;
         }
 
-        public async Task<InsertStudentResponceVM> Handle(PostStudentDetails request, CancellationToken cancellationToken)
+        public async Task<InsertStudentResponseVM> Handle(PostStudentDetails request, CancellationToken cancellationToken)
         {
             _logger.LogInformation("Started processing {namespace} StudentCommandHandler", typeof(PostStudentCommandHandler).Namespace);
             return await _adminService.InsertStudentAsync(request.insertStudentPayload);

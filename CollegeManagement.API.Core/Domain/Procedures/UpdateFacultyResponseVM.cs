@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CollegeManagement.API.Core.Domain.Procedures
 {
-    public class InsertFacultyResponceVM
+    public class UpdateFacultyResponseVM
     {
         public string? ErrorProcedure { get; set; }
         public string? Response { get; set; }

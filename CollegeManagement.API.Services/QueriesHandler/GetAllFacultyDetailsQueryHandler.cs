@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace CollegeManagement.API.Services.QueriesHandler
 {
-    public class GetAllFacultyDetailsQueryHandler : IRequestHandler<GetAllFacultyList, FacultyListResponceVM>
+    public class GetAllFacultyDetailsQueryHandler : IRequestHandler<GetAllFacultyList, FacultyListResponseVM>
     {
         private readonly IAdminService _adminService;
         private readonly ILogger<GetAllFacultyDetailsQueryHandler> _logger;
@@ -22,7 +22,7 @@ namespace CollegeManagement.API.Services.QueriesHandler
             _logger = logger;
         }
 
-        public async Task<FacultyListResponceVM> Handle(GetAllFacultyList request, CancellationToken cancellationToken)
+        public async Task<FacultyListResponseVM> Handle(GetAllFacultyList request, CancellationToken cancellationToken)
         {
             _logger.LogInformation("Started processing {namespace} GetAllFacultyDetailsQueryHandler", typeof(GetAllFacultyDetailsQueryHandler).Namespace);
             return await _adminService.GetAllFacultyDetails();

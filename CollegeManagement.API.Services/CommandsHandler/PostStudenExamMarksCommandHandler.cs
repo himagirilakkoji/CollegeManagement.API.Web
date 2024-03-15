@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace CollegeManagement.API.Services.CommandsHandler
 {
-    public class PostStudenExamMarksCommandHandler : IRequestHandler<PostStudentExamMarksDetails, InsertStudentMarksResponceVM>
+    public class PostStudenExamMarksCommandHandler : IRequestHandler<PostStudentExamMarksDetails, InsertStudentMarksResponseVM>
     {
         private readonly IAdminService _adminService;
         private readonly ILogger<PostStudenExamMarksCommandHandler> _logger;
@@ -22,7 +22,7 @@ namespace CollegeManagement.API.Services.CommandsHandler
             _logger = logger;
         }
 
-        public async Task<InsertStudentMarksResponceVM> Handle(PostStudentExamMarksDetails request, CancellationToken cancellationToken)
+        public async Task<InsertStudentMarksResponseVM> Handle(PostStudentExamMarksDetails request, CancellationToken cancellationToken)
         {
             _logger.LogInformation("Started processing {namespace} PostStudenExamMarksCommandHandler", typeof(PostStudenExamMarksCommandHandler).Namespace);
             return await _adminService.InsertStudentExamMarksAsync(request.insertStudentMarksPayload);

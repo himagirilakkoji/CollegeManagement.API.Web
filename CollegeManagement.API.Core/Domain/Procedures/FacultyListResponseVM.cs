@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace CollegeManagement.API.Core.Domain.Procedures
 {
-    public class UpdateFacultyResponceVM
+    public class FacultyListResponseVM
     {
         public string? ErrorProcedure { get; set; }
-        public string? Response { get; set; }
+        public List<FacultylistVM>? Response { get; set; }
     }
 }

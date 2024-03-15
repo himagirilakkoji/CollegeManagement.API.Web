@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace CollegeManagement.API.Services.CommandsHandler
 {
-    public class DeleteStudentByIdCommandHandler : IRequestHandler<DeleteCurrentStudentById, DeleteStudentResponceVM>
+    public class DeleteStudentByIdCommandHandler : IRequestHandler<DeleteCurrentStudentById, DeleteStudentResponseVM>
     {
         private readonly IAdminService _adminService;
         private readonly ILogger<DeleteStudentByIdCommandHandler> _logger;
@@ -22,7 +22,7 @@ namespace CollegeManagement.API.Services.CommandsHandler
             _logger = logger;
         }
 
-        public async Task<DeleteStudentResponceVM> Handle(DeleteCurrentStudentById request, CancellationToken cancellationToken)
+        public async Task<DeleteStudentResponseVM> Handle(DeleteCurrentStudentById request, CancellationToken cancellationToken)
         {
             _logger.LogInformation("Started processing {namespace} DeleteStudentByIdCommandHandler", typeof(DeleteStudentByIdCommandHandler).Namespace);
             return await _adminService.DeleteStudentById(request.id);

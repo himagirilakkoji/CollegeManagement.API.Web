@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace CollegeManagement.API.Core.Domain.Procedures
 {
-    public class InsertStudentResponceVM
+    public class LoginResponseVM
     {
+        public string? ResponseCode { get; set; }
         public string? ErrorProcedure { get; set; }
-        public string? Response { get; set; }
+        public AdminDetailsVM? adminDetails { get; set; }
     }
 }

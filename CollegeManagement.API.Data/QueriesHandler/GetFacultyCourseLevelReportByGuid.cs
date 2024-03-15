@@ -27,13 +27,13 @@ namespace CollegeManagement.API.Data.QueriesHandler
             _logger = logger;
         }
 
-        public async Task<List<CourseLevelReportResponceVM>> ExecuteStoredProcedure(string spname,Guid guid)
+        public async Task<List<CourseLevelReportResponseVM>> ExecuteStoredProcedure(string spname,Guid guid)
         {
             _logger.LogInformation("Started processing {namespace} GetFacultyCourseLevelReportByGuid", typeof(GetFacultyCourseLevelReportByGuid).Namespace);
 
             //Calling stored procedure 
             var entity = await _collegeDbQueryContext.sPCourseLevelReportEntities.FromSqlInterpolated($@"exec {spname} @FacultyID = {guid}").ToListAsync();
-            var result = _mapper.Map<List<CourseLevelReportResponceVM>>(entity);
+            var result = _mapper.Map<List<CourseLevelReportResponseVM>>(entity);
             _logger.LogInformation("Completed processing {namespace} GetAllStudentDetails", typeof(GetAllStudentDetails).Namespace);
             return result;
         }

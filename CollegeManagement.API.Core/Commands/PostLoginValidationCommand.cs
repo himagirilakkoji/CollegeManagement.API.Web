@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace CollegeManagement.API.Core.Commands
 {
-    public record PostLoginValidation(LoginRequestPayload LoginRequest) : IRequest<LoginResponceVM>
+    public record PostLoginValidation(LoginRequestPayload LoginRequest) : IRequest<LoginResponseVM>
     {
 
     }

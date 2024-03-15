@@ -23,7 +23,7 @@ namespace CollegeManagement.API.Data.CommandsHandler
             _logger = logger;
         }
 
-        public async Task<InsertFacultyResponceVM> ExecuteStoredProcedure(string spname, InsertFacultyPayload payload)
+        public async Task<InsertFacultyResponseVM> ExecuteStoredProcedure(string spname, InsertFacultyPayload payload)
         {
             _logger.LogInformation("Started processing {namespace} InsertFacultyDetails", typeof(InsertFacultyDetails).Namespace);
 
@@ -31,7 +31,7 @@ namespace CollegeManagement.API.Data.CommandsHandler
 
             //Calling stored procedure 
             var entity = await _collegeDbCommandContext.Set<SPInsertFacultyDetailsEntity>().FromSqlInterpolated($@"exec {spname} @InputAsJSON = {InputAsJson}").ToListAsync();
-            var result = _mapper.Map<InsertFacultyResponceVM>(entity.FirstOrDefault());
+            var result = _mapper.Map<InsertFacultyResponseVM>(entity.FirstOrDefault());
 
             _logger.LogInformation("Completed processing {namespace} InsertFacultyDetails", typeof(InsertFacultyDetails).Namespace);
             return result;

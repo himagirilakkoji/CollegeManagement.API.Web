@@ -28,13 +28,13 @@ namespace CollegeManagement.API.Data.CommandsHandler
             _logger = logger;
         }
 
-        public async Task<DeleteFacultyResponceVM> ExecuteStoredProcedure(string spname, Guid guid)
+        public async Task<DeleteFacultyResponseVM> ExecuteStoredProcedure(string spname, Guid guid)
         {
             _logger.LogInformation("Started processing {namespace} DeleteFacultyById", typeof(DeleteFacultyById).Namespace);
 
             //Calling stored procedure 
             var entity = await _collegeDbCommandContext.Set<SPDeleteFacultyByIdEntity>().FromSqlInterpolated($@"exec {spname} @FacultyId = {guid}").ToListAsync();
-            var result = _mapper.Map<DeleteFacultyResponceVM>(entity.FirstOrDefault());
+            var result = _mapper.Map<DeleteFacultyResponseVM>(entity.FirstOrDefault());
 
             _logger.LogInformation("Completed processing {namespace} DeleteFacultyById", typeof(DeleteFacultyById).Namespace);
             return result;

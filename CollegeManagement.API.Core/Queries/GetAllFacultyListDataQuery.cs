@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace CollegeManagement.API.Core.Queries
 {
-    public record GetAllFacultyList() : IRequest<FacultyListResponceVM>
+    public record GetAllFacultyList() : IRequest<FacultyListResponseVM>
     {
     }
 }

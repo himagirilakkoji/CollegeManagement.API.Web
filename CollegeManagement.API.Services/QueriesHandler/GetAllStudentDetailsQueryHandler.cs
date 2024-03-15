@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace CollegeManagement.API.Services.QueriesHandler
 {
-    public class GetAllStudentDetailsQueryHandler : IRequestHandler<GetAllStudentList, List<StudentListResponceVM>>
+    public class GetAllStudentDetailsQueryHandler : IRequestHandler<GetAllStudentList, List<StudentListResponseVM>>
     {
         private readonly IAdminService _adminService;
         private readonly ILogger<GetAllStudentDetailsQueryHandler> _logger;
@@ -21,7 +21,7 @@ namespace CollegeManagement.API.Services.QueriesHandler
             _adminService = adminService;
             _logger = logger;
         }
-        public async Task<List<StudentListResponceVM>> Handle(GetAllStudentList request, CancellationToken cancellationToken)
+        public async Task<List<StudentListResponseVM>> Handle(GetAllStudentList request, CancellationToken cancellationToken)
         {
             _logger.LogInformation("Started processing {namespace} GetAllStudentDetailsQueryHandler", typeof(GetAllStudentDetailsQueryHandler).Namespace);
             return await _adminService.GetAllStudentDetails();

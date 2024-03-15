@@ -10,16 +10,17 @@ namespace CollegeManagement.API.Services.AdminRepository
 {
     public interface IAdminService
     {
-        Task<LoginResponceVM> PostLoginValidationAsync(LoginRequestPayload loginRequest);
-        Task<InsertFacultyResponceVM> InsertFacultyAsync(InsertFacultyPayload insertFacultyPayload);
-        Task<DepartmentResponceVM> GetDepartmentDetails();
-        Task<FacultyListResponceVM> GetAllFacultyDetails();
-        Task<DeleteFacultyResponceVM> DeeleteFacultyById(Guid id);
-        Task<UpdateFacultyResponceVM> UpdateFacultyById(UpdateFacultyPayload updateFacultyPayload);
-        Task<InsertStudentResponceVM> InsertStudentAsync(InsertStudentPayload insertStudentPayload);
-        Task<List<StudentListResponceVM>> GetAllStudentDetails();
-        Task<DeleteStudentResponceVM> DeleteStudentById(int id);
-        Task<InsertStudentMarksResponceVM> InsertStudentExamMarksAsync(InsertStudentMarksPayload insertStudentMarksPayload);
-        Task<List<CourseLevelReportResponceVM>> GetCourseLevelReport(Guid id);
+        Task<LoginResponseVM> PostLoginValidationAsync(LoginRequestPayload loginRequest);
+        Task<InsertFacultyResponseVM> InsertFacultyAsync(InsertFacultyPayload insertFacultyPayload);
+        Task<DepartmentResponseVM> GetDepartmentDetails();
+        Task<FacultyListResponseVM> GetAllFacultyDetails();
+        Task<DeleteFacultyResponseVM> DeeleteFacultyById(Guid id);
+        Task<UpdateFacultyResponseVM> UpdateFacultyById(UpdateFacultyPayload updateFacultyPayload);
+        Task<InsertStudentResponseVM> InsertStudentAsync(InsertStudentPayload insertStudentPayload);
+        Task<List<StudentListResponseVM>> GetAllStudentDetails();
+        Task<DeleteStudentResponseVM> DeleteStudentById(int id);
+        Task<InsertStudentMarksResponseVM> InsertStudentExamMarksAsync(InsertStudentMarksPayload insertStudentMarksPayload);
+        Task<List<CourseLevelReportResponseVM>> GetCourseLevelReport(Guid id);
+        Task<List<SubjectLevelReportResponseVM>> GetSubjectLevelReport(Guid id);
     }
 }

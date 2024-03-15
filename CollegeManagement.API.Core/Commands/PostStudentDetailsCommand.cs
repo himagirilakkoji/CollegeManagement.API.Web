@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace CollegeManagement.API.Core.Commands
 {
-    public record PostStudentDetails(InsertStudentPayload insertStudentPayload) : IRequest<InsertStudentResponceVM>
+    public record PostStudentDetails(InsertStudentPayload insertStudentPayload) : IRequest<InsertStudentResponseVM>
     {
     }
 }

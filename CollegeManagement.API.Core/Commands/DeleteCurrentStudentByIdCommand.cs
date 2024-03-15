@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace CollegeManagement.API.Core.Commands
 {
-    public record DeleteCurrentStudentById(int id) : IRequest<DeleteStudentResponceVM>
+    public record DeleteCurrentStudentById(int id) : IRequest<DeleteStudentResponseVM>
     {
     }
 }
