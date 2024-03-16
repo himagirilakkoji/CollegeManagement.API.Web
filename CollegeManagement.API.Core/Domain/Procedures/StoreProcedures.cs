@@ -12,6 +12,7 @@ namespace CollegeManagement.API.Core.Domain.Procedures
         public string? GetDepartmentdata { get; set; }
         public string? InsertFacultyDetails { get; set; }
         public string? GetAllFaculties { get; set; }
+        public string? GetAllFacultiesByPagination { get; set; }
         public string? DeleteFacultyById { get; set; }
         public string? UpdateFacultyById { get; set; }
         public string? InsertStudentDetails { get; set; }

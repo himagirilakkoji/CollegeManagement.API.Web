@@ -28,6 +28,7 @@ namespace CollegeManagement.API.Web.DependencyRegistration
             services.AddScoped<InsertStudentExamMarksDetails>();
             services.AddScoped<GetFacultyCourseLevelReportByGuid>();
             services.AddScoped<GetFacultySubjectLevelReportByGuid>();
+            services.AddScoped<GetAllFacultyDetailsWithPagination>();
             return services;
         }
     }

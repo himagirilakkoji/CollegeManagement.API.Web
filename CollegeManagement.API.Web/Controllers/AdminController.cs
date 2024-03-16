@@ -269,6 +269,44 @@ namespace CollegeManagement.API.Web.Controllers
 
         }
 
+        // <summary>
+        // Return Faculty list Details
+        // </summary>
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status422UnprocessableEntity)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [HttpGet("GetAllFacultiesWithPagination/{pageNumber}/{pageSize}")]
+        public async Task<ActionResult<FacultyListResponseVM>> GetAllFacultiesWithPagination([FromRoute] int pageNumber, int pageSize)
+        {
+            try
+            {
+                _logger.LogInformation("Started processing {namespace} AdminController", typeof(AdminController).Namespace);
+                var result = await _mediator.Send<FacultyListResponseVM>(new GetAllFacultyListWithPagination(pageNumber, pageSize));
+
+                if (result.ErrorProcedure != null)
+                {
+                    _logger.LogInformation("Completed processing {namespace} AdminController", typeof(AdminController).Namespace);
+                    return StatusCode(StatusCodes.Status500InternalServerError);
+                }
+
+                if (result.Response == null)
+                {
+                    _logger.LogInformation("Completed processing {namespace} AdminController", typeof(AdminController).Namespace);
+                    return NotFound();
+                }
+
+                _logger.LogInformation("Completed processing {namespace} AdminController", typeof(AdminController).Namespace);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogInformation("Completed processing {namespace} AdminController", typeof(AdminController).Namespace);
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+
+        }
+
 
         // <summary>
         // Post CreateStudent Details

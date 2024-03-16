@@ -16,6 +16,7 @@ namespace CollegeManagement.API.Services.AdminRepository
         Task<FacultyListResponseVM> GetAllFacultyDetails();
         Task<DeleteFacultyResponseVM> DeeleteFacultyById(Guid id);
         Task<UpdateFacultyResponseVM> UpdateFacultyById(UpdateFacultyPayload updateFacultyPayload);
+        Task<FacultyListResponseVM> GetAllFacultyDetailsWithPagination(int pageNumber,int pageSize);
         Task<InsertStudentResponseVM> InsertStudentAsync(InsertStudentPayload insertStudentPayload);
         Task<List<StudentListResponseVM>> GetAllStudentDetails();
         Task<DeleteStudentResponseVM> DeleteStudentById(int id);
