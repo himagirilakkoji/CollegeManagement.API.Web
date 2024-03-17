@@ -33,6 +33,7 @@ namespace CollegeManagement.API.Data
             modelBuilder.Entity<SPInsertStudentExamMarksDetailsEntity>().HasNoKey();
             modelBuilder.Entity<SPCourseLevelReportEntity>().HasNoKey();
             modelBuilder.Entity<SPSubjectLevelReportEntity>().HasNoKey();
+            modelBuilder.Entity<SPUpdateStudentByIdEntity>().HasNoKey();
             base.OnModelCreating(modelBuilder);
         }
 
@@ -78,6 +79,9 @@ namespace CollegeManagement.API.Data
 
         //Get SubjectLevelReport DbSet
         public DbSet<SPSubjectLevelReportEntity> sPSubjectLevelReportEntities { get; set; }
+
+        //SPUpdateStudentByIdEntity
+        public DbSet<SPUpdateStudentByIdEntity> sPUpdateStudentByIdEntities { get; set; }
 
     }
 }

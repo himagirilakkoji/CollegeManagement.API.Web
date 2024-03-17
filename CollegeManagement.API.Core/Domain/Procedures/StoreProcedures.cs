@@ -21,5 +21,6 @@ namespace CollegeManagement.API.Core.Domain.Procedures
         public string? InsertExamMarksDetails { get; set; }
         public string? CalculateCourseLevelReport { get; set; }
         public string? CalculateSubjectLevelReport { get; set; }
+        public string? UpdateStudentById { get; set; }
     }
 }

@@ -56,6 +56,10 @@ namespace CollegeManagement.API.Data.Mappers
 
                 CreateMap<SPCourseLevelReportEntity, CourseLevelReportResponseVM>().ReverseMap();
                 CreateMap<SPSubjectLevelReportEntity, SubjectLevelReportResponseVM>().ReverseMap();
+
+                CreateMap<SPUpdateStudentByIdEntity, UpdateStudentResponseVM>()
+                          .ForMember(dest => dest.ErrorProcedure, src => src.MapFrom(x => x.ErrorProcedure))
+                          .ForMember(dest => dest.Response, src => src.MapFrom(x => x.Response));
         }
     }
 }

@@ -29,6 +29,7 @@ namespace CollegeManagement.API.Web.DependencyRegistration
             services.AddScoped<GetFacultyCourseLevelReportByGuid>();
             services.AddScoped<GetFacultySubjectLevelReportByGuid>();
             services.AddScoped<GetAllFacultyDetailsWithPagination>();
+            services.AddScoped<UpdateStudentById>();
             return services;
         }
     }

@@ -4,18 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CollegeManagement.API.Core.Domain.Procedures
+namespace CollegeManagement.API.Core.Domain
 {
-    public class StudentListResponseVM
+    public class UpdateStudentPayload
     {
-        public int StudentID { get; set; }
         public string? FirstName { get; set; }
         public string? LastName { get; set; }
         public string? UserName { get; set; }
         public string? Email { get; set; }
-        public string? FacultyUserName { get; set; }
         public string? Password { get; set; }
-        public Guid? FacultyID { get; set; }
-        public List<StudentCourseVM>? studentCourseVM { get; set; }
+        public string? Branch { get; set; }
+        public string? Faculty { get; set; }
     }
 }

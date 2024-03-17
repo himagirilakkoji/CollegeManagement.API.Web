@@ -20,6 +20,7 @@ namespace CollegeManagement.API.Services.AdminRepository
         private readonly InsertFacultyDetails _insertFacultyDetails;
         private readonly DeleteFacultyById _deleteFacultyById;
         private readonly UpdateFacultyById _updateFacultyById;
+        private readonly UpdateStudentById _updateStudentById;
         private readonly InsertStudentDetails _insertStudentDetails;
         private readonly GetAllStudentDetails _getAllStudentDetails;
         private readonly DeleteStudentById _deleteStudentById;
@@ -32,7 +33,8 @@ namespace CollegeManagement.API.Services.AdminRepository
         public AdminService(CollegeDbCommandContext collegeDbCommandContext, IMapper mapper , UserLoginValidation userLoginValidation, IOptions<StoreProcedures> storeProcedures, ILogger<AdminService> logger,
                GetDepartmentDetails getDepartmentDetails, InsertFacultyDetails insertFacultyDetails, GetAllFacultyDetails getAllFacultyDetails, DeleteFacultyById deleteFacultyById, UpdateFacultyById updateFacultyById, 
                InsertStudentDetails insertStudentDetails, GetAllStudentDetails getAllStudentDetails, DeleteStudentById deleteStudentById, InsertStudentExamMarksDetails insertStudentExamMarksDetails,
-               GetFacultyCourseLevelReportByGuid getFacultyCourseLevelReportByGuid, GetFacultySubjectLevelReportByGuid getFacultySubjectLevelReportByGuid, GetAllFacultyDetailsWithPagination getAllFacultyDetailsWithPagination)
+               GetFacultyCourseLevelReportByGuid getFacultyCourseLevelReportByGuid, GetFacultySubjectLevelReportByGuid getFacultySubjectLevelReportByGuid, GetAllFacultyDetailsWithPagination getAllFacultyDetailsWithPagination,
+               UpdateStudentById updateStudentById)
         {
             _collegeDbCommandContext = collegeDbCommandContext;
             _mapper = mapper;
@@ -51,6 +53,7 @@ namespace CollegeManagement.API.Services.AdminRepository
             _getFacultyCourseLevelReportByGuid = getFacultyCourseLevelReportByGuid;
             _getFacultySubjectLevelReportByGuid = getFacultySubjectLevelReportByGuid;
             _getAllFacultyDetailsWithPagination = getAllFacultyDetailsWithPagination;
+            _updateStudentById = updateStudentById;
 
         }
 
@@ -129,6 +132,12 @@ namespace CollegeManagement.API.Services.AdminRepository
         {
             _logger.LogInformation("Started processing {namespace} AdminService", typeof(AdminService).Namespace);
             return await _getFacultySubjectLevelReportByGuid.ExecuteStoredProcedure(_storeProcedures.CalculateSubjectLevelReport, guid);
+        }
+
+        public async Task<UpdateStudentResponseVM> UpdateStudentById(int id, UpdateStudentPayload updateStudentPayload)
+        {
+            _logger.LogInformation("Started processing {namespace} AdminService", typeof(AdminService).Namespace);
+            return await _updateStudentById.ExecuteStoredProcedure(_storeProcedures.UpdateStudentById, id, updateStudentPayload);
         }
     }
 }

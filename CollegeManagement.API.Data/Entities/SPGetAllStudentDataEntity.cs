@@ -13,6 +13,7 @@ namespace CollegeManagement.API.Data.Entities
         public string? LastName { get; set; }
         public string? UserName { get; set; }
         public string? Email { get; set; }
+        public string? FacultyUserName { get; set; }
         public string? Password { get; set; }
         public Guid? FacultyID { get; set; }
         public string? studentCourseEntities { get; set; }

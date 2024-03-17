@@ -519,5 +519,45 @@ namespace CollegeManagement.API.Web.Controllers
             }
 
         }
+
+        // <summary>
+        // Update StudentUser Details
+        // </summary>
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status422UnprocessableEntity)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [HttpPut("UpdateCurrentStudent/{Id}")]
+        public async Task<ActionResult<UpdateStudentResponseVM>> UpdateCurrentStudent([FromRoute] int Id, [FromBody] UpdateStudentPayload updateFacultyPayload)
+        {
+            try
+            {
+                _logger.LogInformation("Started processing {namespace} AdminController", typeof(AdminController).Namespace);
+
+                // Assuming a method to map the request to a command for the mediator
+                var result = await _mediator.Send<UpdateStudentResponseVM>(new UpdateCurrentStudentById(Id , updateFacultyPayload));
+
+                if (result.ErrorProcedure != null)
+                {
+                    _logger.LogInformation("Completed processing {namespace} AdminController", typeof(AdminController).Namespace);
+                    return StatusCode(StatusCodes.Status500InternalServerError);
+                }
+
+                if (result.Response == null)
+                {
+                    _logger.LogInformation("Completed processing {namespace} AdminController", typeof(AdminController).Namespace);
+                    return NotFound();
+                }
+
+                _logger.LogInformation("Completed processing {namespace} AdminController", typeof(AdminController).Namespace);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogInformation("Completed processing {namespace} AdminController", typeof(AdminController).Namespace);
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+
+        }
     }
 }

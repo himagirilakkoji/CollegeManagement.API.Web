@@ -51,6 +51,7 @@ namespace CollegeManagement.API.Data.QueriesHandler
                     LastName = item.LastName,
                     UserName = item.UserName,
                     Email = item.Email,
+                    FacultyUserName = item.FacultyUserName,
                     Password = item.Password,
                     FacultyID = item.FacultyID,
                     studentCourseVM = studentCourses
