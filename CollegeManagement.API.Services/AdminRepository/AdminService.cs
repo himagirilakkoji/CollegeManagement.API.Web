@@ -27,6 +27,7 @@ namespace CollegeManagement.API.Services.AdminRepository
         private readonly InsertStudentExamMarksDetails _insertStudentExamMarksDetails;
         private readonly GetFacultyCourseLevelReportByGuid _getFacultyCourseLevelReportByGuid;
         private readonly GetFacultySubjectLevelReportByGuid _getFacultySubjectLevelReportByGuid;
+        private readonly GetStudentMarksById _getStudentMarksById;
         private readonly StoreProcedures _storeProcedures;
         private readonly ILogger<AdminService> _logger;
 
@@ -34,7 +35,7 @@ namespace CollegeManagement.API.Services.AdminRepository
                GetDepartmentDetails getDepartmentDetails, InsertFacultyDetails insertFacultyDetails, GetAllFacultyDetails getAllFacultyDetails, DeleteFacultyById deleteFacultyById, UpdateFacultyById updateFacultyById, 
                InsertStudentDetails insertStudentDetails, GetAllStudentDetails getAllStudentDetails, DeleteStudentById deleteStudentById, InsertStudentExamMarksDetails insertStudentExamMarksDetails,
                GetFacultyCourseLevelReportByGuid getFacultyCourseLevelReportByGuid, GetFacultySubjectLevelReportByGuid getFacultySubjectLevelReportByGuid, GetAllFacultyDetailsWithPagination getAllFacultyDetailsWithPagination,
-               UpdateStudentById updateStudentById)
+               UpdateStudentById updateStudentById, GetStudentMarksById getStudentMarksById)
         {
             _collegeDbCommandContext = collegeDbCommandContext;
             _mapper = mapper;
@@ -54,6 +55,7 @@ namespace CollegeManagement.API.Services.AdminRepository
             _getFacultySubjectLevelReportByGuid = getFacultySubjectLevelReportByGuid;
             _getAllFacultyDetailsWithPagination = getAllFacultyDetailsWithPagination;
             _updateStudentById = updateStudentById;
+            _getStudentMarksById = getStudentMarksById;
 
         }
 
@@ -138,6 +140,11 @@ namespace CollegeManagement.API.Services.AdminRepository
         {
             _logger.LogInformation("Started processing {namespace} AdminService", typeof(AdminService).Namespace);
             return await _updateStudentById.ExecuteStoredProcedure(_storeProcedures.UpdateStudentById, id, updateStudentPayload);
+        }
+        public async Task<List<StudentMarksResponseVM>> GetAllStudentMarksDetails(int id)
+        {
+            _logger.LogInformation("Started processing {namespace} AdminService", typeof(AdminService).Namespace);
+            return await _getStudentMarksById.ExecuteStoredProcedure(_storeProcedures.GetStudentMarksById, id);
         }
     }
 }

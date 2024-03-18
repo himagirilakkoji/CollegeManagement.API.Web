@@ -24,5 +24,6 @@ namespace CollegeManagement.API.Services.AdminRepository
         Task<List<CourseLevelReportResponseVM>> GetCourseLevelReport(Guid id);
         Task<List<SubjectLevelReportResponseVM>> GetSubjectLevelReport(Guid id);
         Task<UpdateStudentResponseVM> UpdateStudentById(int id,UpdateStudentPayload updateStudentPayload);
+        Task<List<StudentMarksResponseVM>> GetAllStudentMarksDetails(int id);
     }
 }

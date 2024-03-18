@@ -60,6 +60,8 @@ namespace CollegeManagement.API.Data.Mappers
                 CreateMap<SPUpdateStudentByIdEntity, UpdateStudentResponseVM>()
                           .ForMember(dest => dest.ErrorProcedure, src => src.MapFrom(x => x.ErrorProcedure))
                           .ForMember(dest => dest.Response, src => src.MapFrom(x => x.Response));
+
+                CreateMap<SPStudentMarksEntity, StudentMarksResponseVM>().ReverseMap();
         }
     }
 }

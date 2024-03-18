@@ -559,5 +559,37 @@ namespace CollegeManagement.API.Web.Controllers
             }
 
         }
+
+        // <summary>
+        // Return StudentMarksList Details
+        // </summary>
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status422UnprocessableEntity)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [HttpGet("StudentMarksListById/{Id}")]
+        public async Task<ActionResult<List<StudentMarksResponseVM>>> StudentMarksListById(int Id)
+        {
+            try
+            {
+                _logger.LogInformation("Started processing {namespace} AdminController", typeof(AdminController).Namespace);
+                var result = await _mediator.Send<List<StudentMarksResponseVM>>(new GetStudentMarksList(Id));
+
+                if (!result.Any())
+                {
+                    _logger.LogInformation("Completed processing {namespace} AdminController", typeof(AdminController).Namespace);
+                    return NotFound();
+                }
+
+                _logger.LogInformation("Completed processing {namespace} AdminController", typeof(AdminController).Namespace);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogInformation("Completed processing {namespace} AdminController", typeof(AdminController).Namespace);
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+
+        }
     }
 }
