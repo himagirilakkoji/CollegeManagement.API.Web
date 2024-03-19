@@ -28,13 +28,13 @@ namespace CollegeManagement.API.Data.QueriesHandler
             _logger = logger;
         }
 
-        public async Task<FacultyListResponseVM> ExecuteStoredProcedure(string spname,int pageNumber ,int pageSize)
+        public async Task<FacultyListResponseWithPaginationVM> ExecuteStoredProcedure(string spname,int pageNumber ,int pageSize)
         {
             _logger.LogInformation("Started processing {namespace} GetAllFacultyDetailsWithPagination", typeof(GetAllFacultyDetailsWithPagination).Namespace);
 
             //Calling stored procedure 
-            var entity = await _collegeDbQueryContext.Set<SPGetAllFacultyDataEntity>().FromSqlInterpolated($@"exec {spname} @PageNumber = {pageNumber},@PageSize = {pageSize}").ToListAsync();
-            var result = _mapper.Map<FacultyListResponseVM>(entity.FirstOrDefault());
+            var entity = await _collegeDbQueryContext.Set<SPGetAllFacultyDataWithPaginationEntity>().FromSqlInterpolated($@"exec {spname} @PageNumber = {pageNumber},@PageSize = {pageSize}").ToListAsync();
+            var result = _mapper.Map<FacultyListResponseWithPaginationVM>(entity.FirstOrDefault());
 
             if (entity.FirstOrDefault().Response != null)
             {

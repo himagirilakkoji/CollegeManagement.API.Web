@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace CollegeManagement.API.Services.QueriesHandler
 {
-    public class GetAllFacultyDetailsWithPaginationQueryHandler : IRequestHandler<GetAllFacultyListWithPagination, FacultyListResponseVM>
+    public class GetAllFacultyDetailsWithPaginationQueryHandler : IRequestHandler<GetAllFacultyListWithPagination, FacultyListResponseWithPaginationVM>
     {
         private readonly IAdminService _adminService;
         private readonly ILogger<GetAllFacultyDetailsWithPaginationQueryHandler> _logger;
@@ -22,7 +22,7 @@ namespace CollegeManagement.API.Services.QueriesHandler
             _logger = logger;
         }
 
-        public async Task<FacultyListResponseVM> Handle(GetAllFacultyListWithPagination request, CancellationToken cancellationToken)
+        public async Task<FacultyListResponseWithPaginationVM> Handle(GetAllFacultyListWithPagination request, CancellationToken cancellationToken)
         {
             _logger.LogInformation("Started processing {namespace} GetAllFacultyDetailsWithPaginationQueryHandler", typeof(GetAllFacultyDetailsWithPaginationQueryHandler).Namespace);
             return await _adminService.GetAllFacultyDetailsWithPagination(request.pageNumber , request.pageSize);

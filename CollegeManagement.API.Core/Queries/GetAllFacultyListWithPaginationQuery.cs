@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace CollegeManagement.API.Core.Queries
 {
-    public record GetAllFacultyListWithPagination(int pageNumber ,int pageSize) : IRequest<FacultyListResponseVM>
+    public record GetAllFacultyListWithPagination(int pageNumber ,int pageSize) : IRequest<FacultyListResponseWithPaginationVM>
     {
     }
 }

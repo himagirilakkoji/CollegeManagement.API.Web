@@ -77,7 +77,7 @@ namespace CollegeManagement.API.Services.AdminRepository
             return await _getAllFacultyDetails.ExecuteStoredProcedure(_storeProcedures.GetAllFaculties);
         }
 
-        public async Task<FacultyListResponseVM> GetAllFacultyDetailsWithPagination(int pageNumber ,int pageSize)
+        public async Task<FacultyListResponseWithPaginationVM> GetAllFacultyDetailsWithPagination(int pageNumber ,int pageSize)
         {
             _logger.LogInformation("Started processing {namespace} AdminService", typeof(AdminService).Namespace);
             return await _getAllFacultyDetailsWithPagination.ExecuteStoredProcedure(_storeProcedures.GetAllFacultiesByPagination,pageNumber ,pageSize);

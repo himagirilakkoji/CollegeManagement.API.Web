@@ -35,6 +35,7 @@ namespace CollegeManagement.API.Data
             modelBuilder.Entity<SPSubjectLevelReportEntity>().HasNoKey();
             modelBuilder.Entity<SPUpdateStudentByIdEntity>().HasNoKey();
             modelBuilder.Entity<SPStudentMarksEntity>().HasNoKey();
+            modelBuilder.Entity<SPGetAllFacultyDataWithPaginationEntity>().HasNoKey();
             base.OnModelCreating(modelBuilder);
         }
 
@@ -56,6 +57,9 @@ namespace CollegeManagement.API.Data
 
         //Get AllFacultyDetails DbSet
         public DbSet<SPGetAllFacultyDataEntity> sPGetAllFacultyDatas { get; set; }
+
+        //Get AllFacultyDetails With Pagination DbSet
+        public DbSet<SPGetAllFacultyDataWithPaginationEntity> sPGetAllFacultyDataWithPaginationEntities { get; set; }
 
         //Delete CurrentFacultById DbSet
         public DbSet<SPDeleteFacultyByIdEntity> sPDeleteFacultyByIdEntities { get; set; }

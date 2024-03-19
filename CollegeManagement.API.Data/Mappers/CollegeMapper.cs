@@ -34,7 +34,12 @@ namespace CollegeManagement.API.Data.Mappers
                           .ForMember(dest => dest.ErrorProcedure, src => src.MapFrom(x => x.ErrorProcedure))
                           .ForMember(dest => dest.Response, src => src.Ignore());
 
-                CreateMap<SPDeleteFacultyByIdEntity, DeleteFacultyResponseVM>()
+                CreateMap<SPGetAllFacultyDataWithPaginationEntity, FacultyListResponseWithPaginationVM>()
+                          .ForMember(dest => dest.ErrorProcedure, src => src.MapFrom(x => x.ErrorProcedure))
+                          .ForMember(dest => dest.TotalRecords, src => src.MapFrom(x => x.TotalRecords))
+                          .ForMember(dest => dest.Response, src => src.Ignore());
+
+            CreateMap<SPDeleteFacultyByIdEntity, DeleteFacultyResponseVM>()
                           .ForMember(dest => dest.ErrorProcedure, src => src.MapFrom(x => x.ErrorProcedure))
                           .ForMember(dest => dest.Response, src => src.MapFrom(x => x.Response));
 
