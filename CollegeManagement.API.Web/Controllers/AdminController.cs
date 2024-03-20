@@ -585,5 +585,37 @@ namespace CollegeManagement.API.Web.Controllers
             }
 
         }
+
+        // <summary>
+        // Return StudentNames Based on input text
+        // </summary>
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status422UnprocessableEntity)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [HttpGet("SearchStudent/{SearchText}")]
+        public async Task<ActionResult<List<SearchStudentResponseVM>>> SearchStudent(string SearchText)
+        {
+            try
+            {
+                _logger.LogInformation("Started processing {namespace} AdminController", typeof(AdminController).Namespace);
+                var result = await _mediator.Send<List<SearchStudentResponseVM>>(new GetSearchStudentNamesList(SearchText));
+
+                if (!result.Any())
+                {
+                    _logger.LogInformation("Completed processing {namespace} AdminController", typeof(AdminController).Namespace);
+                    return NotFound();
+                }
+
+                _logger.LogInformation("Completed processing {namespace} AdminController", typeof(AdminController).Namespace);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogInformation("Completed processing {namespace} AdminController", typeof(AdminController).Namespace);
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+
+        }
     }
 }

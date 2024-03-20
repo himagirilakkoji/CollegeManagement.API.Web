@@ -67,6 +67,7 @@ namespace CollegeManagement.API.Data.Mappers
                           .ForMember(dest => dest.Response, src => src.MapFrom(x => x.Response));
 
                 CreateMap<SPStudentMarksEntity, StudentMarksResponseVM>().ReverseMap();
+                CreateMap<SPSearchStudentResponseEntity, SearchStudentResponseVM>().ReverseMap();
         }
     }
 }

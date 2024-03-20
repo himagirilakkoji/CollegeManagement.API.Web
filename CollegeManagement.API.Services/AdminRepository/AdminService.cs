@@ -28,6 +28,7 @@ namespace CollegeManagement.API.Services.AdminRepository
         private readonly GetFacultyCourseLevelReportByGuid _getFacultyCourseLevelReportByGuid;
         private readonly GetFacultySubjectLevelReportByGuid _getFacultySubjectLevelReportByGuid;
         private readonly GetStudentMarksById _getStudentMarksById;
+        private readonly GetSearchStudentNamesByText _getSearchStudentNamesByText;
         private readonly StoreProcedures _storeProcedures;
         private readonly ILogger<AdminService> _logger;
 
@@ -35,7 +36,7 @@ namespace CollegeManagement.API.Services.AdminRepository
                GetDepartmentDetails getDepartmentDetails, InsertFacultyDetails insertFacultyDetails, GetAllFacultyDetails getAllFacultyDetails, DeleteFacultyById deleteFacultyById, UpdateFacultyById updateFacultyById, 
                InsertStudentDetails insertStudentDetails, GetAllStudentDetails getAllStudentDetails, DeleteStudentById deleteStudentById, InsertStudentExamMarksDetails insertStudentExamMarksDetails,
                GetFacultyCourseLevelReportByGuid getFacultyCourseLevelReportByGuid, GetFacultySubjectLevelReportByGuid getFacultySubjectLevelReportByGuid, GetAllFacultyDetailsWithPagination getAllFacultyDetailsWithPagination,
-               UpdateStudentById updateStudentById, GetStudentMarksById getStudentMarksById)
+               UpdateStudentById updateStudentById, GetStudentMarksById getStudentMarksById, GetSearchStudentNamesByText getSearchStudentNamesByText)
         {
             _collegeDbCommandContext = collegeDbCommandContext;
             _mapper = mapper;
@@ -56,7 +57,7 @@ namespace CollegeManagement.API.Services.AdminRepository
             _getAllFacultyDetailsWithPagination = getAllFacultyDetailsWithPagination;
             _updateStudentById = updateStudentById;
             _getStudentMarksById = getStudentMarksById;
-
+            _getSearchStudentNamesByText = getSearchStudentNamesByText;
         }
 
         public async Task<LoginResponseVM> PostLoginValidationAsync(LoginRequestPayload payload)
@@ -145,6 +146,12 @@ namespace CollegeManagement.API.Services.AdminRepository
         {
             _logger.LogInformation("Started processing {namespace} AdminService", typeof(AdminService).Namespace);
             return await _getStudentMarksById.ExecuteStoredProcedure(_storeProcedures.GetStudentMarksById, id);
+        }
+
+        public async Task<List<SearchStudentResponseVM>> GetSearchStudentDetails(string? searchText)
+        {
+            _logger.LogInformation("Started processing {namespace} AdminService", typeof(AdminService).Namespace);
+            return await _getSearchStudentNamesByText.ExecuteStoredProcedure(_storeProcedures.SearchStudent, searchText);
         }
     }
 }

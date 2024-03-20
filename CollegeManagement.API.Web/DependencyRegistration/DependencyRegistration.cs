@@ -31,6 +31,7 @@ namespace CollegeManagement.API.Web.DependencyRegistration
             services.AddScoped<GetAllFacultyDetailsWithPagination>();
             services.AddScoped<UpdateStudentById>();
             services.AddScoped<GetStudentMarksById>();
+            services.AddScoped<GetSearchStudentNamesByText>();
             return services;
         }
     }

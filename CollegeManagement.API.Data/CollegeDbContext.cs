@@ -36,6 +36,7 @@ namespace CollegeManagement.API.Data
             modelBuilder.Entity<SPUpdateStudentByIdEntity>().HasNoKey();
             modelBuilder.Entity<SPStudentMarksEntity>().HasNoKey();
             modelBuilder.Entity<SPGetAllFacultyDataWithPaginationEntity>().HasNoKey();
+            modelBuilder.Entity<SPSearchStudentResponseEntity>().HasNoKey();
             base.OnModelCreating(modelBuilder);
         }
 
@@ -90,6 +91,9 @@ namespace CollegeManagement.API.Data
 
         //Get SubjectmarksReport DbSet
         public DbSet<SPStudentMarksEntity> sPStudentMarksEntities { get; set; }
+
+        //Get SubjectmarksReport DbSet
+        public DbSet<SPSearchStudentResponseEntity> sPSearchStudentResponseEntities { get; set; }
 
     }
 }
